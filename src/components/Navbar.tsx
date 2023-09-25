@@ -1,0 +1,68 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+
+const Navbar = () => {
+    return (
+        <nav className='flex justify-between px-9 w-full h-full py-3 items-center'>
+            <div className='flex space-x-2'>
+                <Image
+                    src="/logoicon.png"
+                    width={50}
+                    height={32}
+                    alt='logoicon'
+                />
+                <Image
+                    src="/logo.png"
+                    width={130}
+                    height={41}
+                    alt='logo'
+                />
+            </div>
+            <div >
+                <ul className='flex space-x-14 2xl:space-x-10 lg:space-x-8'>
+                    <li>
+                        <Link href="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link href="/shop">Shop</Link>
+                    </li>
+                    <li>
+                        <Link href="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link href="/contact">Contact</Link>
+                    </li>
+                </ul>
+            </div>
+            <div className='flex space-x-8'>
+                <Image
+                    src='account.svg'
+                    height={28}
+                    alt='icon'
+                    width={28}
+                />
+                <Image
+                    src="search.svg"
+                    height={25}
+                    alt='icon'
+                    width={25}
+                />
+                <Image
+                    src="heart.svg"
+                    height={25}
+                    alt='icon'
+                    width={25}
+                />
+                <Image
+                    src="cart.svg"
+                    height={27}
+                    alt='icon'
+                    width={27}
+                />
+            </div>
+        </nav>
+    )
+}
+
+export default Navbar
