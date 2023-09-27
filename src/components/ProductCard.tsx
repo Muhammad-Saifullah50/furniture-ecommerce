@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Button } from "./ui/button"
+
 interface ProductCardProps {
     title: string
     image: string
@@ -8,9 +9,9 @@ interface ProductCardProps {
 
 }
 const ProductCard = ({ title, image, desc, price }: ProductCardProps) => {
-    return (
+    return (<>
         <div className="w-full">
-            <div className="w-full relative z-0">
+            <div className="w-full relative z-0 group">
                 <Image
                     src={image}
                     alt={title}
@@ -22,42 +23,42 @@ const ProductCard = ({ title, image, desc, price }: ProductCardProps) => {
                     <p className="text-[#898989]">{desc}</p>
                     <p className="text-[#3A3A3A] text-xl font-semibold">{price}</p>
                 </div>
-            </div>
-            <div className="overlay hidden hover:block z-10 w-full h-full opacity-20 absolute top-0 left-0 bg-[#3A3A3A]">
-                <Button>Add to Cart</Button>
-                <div className="btns">
-                    <div>
-                        <Image
-                            src='/share.svg'
-                            alt='share'
-                            width={30}
-                            height={30}
-                        />
-                        <p>Share</p>
-                    </div>
-                    <div>
-                        <Image
-                            src='/compare.svg'
-                            alt='comare'
-                            width={30}
-                            height={30}
-                        />
-                        <p>Compare</p>
-                    </div>
-                    <div>
-                        <Image
-                            src='/heart.svg'
-                            alt='heart'
-                            width={30}
-                            height={30}
-                        />
-                        Like
+                <div className=" overlay hidden group-hover:flex z-10 w-full h-full absolute bg-opacity-80 top-0 left-0 bg-[#3A3A3A] justify-center flex-col p-5 gap-5">
+                    <Button variant='secondary' className="text-[#B88E2F] font-semibold">Add to Cart</Button>
+                    <div className="btns flex justify-between my-4 text-white font-semibold">
+                        <div  className="flex flex-col justify-center items-center gap-2">
+                            <Image
+                                src='/share.svg'
+                                alt='share'
+                                width={30}
+                                height={30}
+                            />
+                            <p>Share</p>
+                        </div>
+                        <div className="flex flex-col justify-center items-center gap-2">
+                            <Image
+                                src='/compare.svg'
+                                alt='comare'
+                                width={30}
+                                height={30}
+                            />
+                            <p>Compare</p>
+                        </div>
+                        <div className="flex flex-col justify-center items-center gap-2">
+                            <Image
+                                src='/Heart.svg'
+                                alt='heart'
+                                width={30}
+                                height={30}
+                            />
+                            Like
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    )
+
+    </>)
 }
 
 export default ProductCard

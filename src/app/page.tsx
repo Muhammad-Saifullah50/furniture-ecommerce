@@ -1,4 +1,4 @@
-import { ProductCard } from '@/components'
+import { ProductCard, MySlider } from '@/components'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
@@ -68,53 +68,67 @@ export default function Home() {
       </div>
       <div className='grid grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-[90vw] mx-auto gap-7'>
         <ProductCard
-        title='Syltherine'
-        image='/image 1.png'
-        desc='Stylish cafe chair'
-        price='Rp 2.500.000'
+          title='Syltherine'
+          image='/image 1.png'
+          desc='Stylish cafe chair'
+          price='Rp 2.500.000'
         />
         <ProductCard
-        title='Leviosa'
-        image='/image 2.png'
-        desc='Stylish cafe chair'
-        price='Rp 2.500.000'
+          title='Leviosa'
+          image='/image 2.png'
+          desc='Stylish cafe chair'
+          price='Rp 2.500.000'
         />
         <ProductCard
-        title='Lolito'
-        image='/image 3.png'
-        desc='Luxury big sofa'
-        price='Rp 7.000.000'
+          title='Lolito'
+          image='/image 3.png'
+          desc='Luxury big sofa'
+          price='Rp 7.000.000'
         />
         <ProductCard
-        title='Respira'
-        image='/image 4.png'
-        desc='Outdoor bar table and store'
-        price='Rp 500.000'
+          title='Respira'
+          image='/image 4.png'
+          desc='Outdoor bar table and store'
+          price='Rp 500.000'
         />
         <ProductCard
-        title='Muggo'
-        image='/image 5.png'
-        desc='Small Mug'
-        price='Rp 150.000'
+          title='Muggo'
+          image='/image 5.png'
+          desc='Small Mug'
+          price='Rp 150.000'
         />
         <ProductCard
-        title='Grifo'
-        image='/image 6.png'
-        desc='Night Lamp'
-        price='Rp 1.500.000'
+          title='Grifo'
+          image='/image 6.png'
+          desc='Night Lamp'
+          price='Rp 1.500.000'
         />
         <ProductCard
-        title='Pingky'
-        image='/image 7.png'
-        desc='Cute bed set'
-        price='Rp 2.500.000'
+          title='Pingky'
+          image='/image 7.png'
+          desc='Cute bed set'
+          price='Rp 2.500.000'
         />
         <ProductCard
-        title='Potty'
-        image='/image 8.png'
-        desc='Minimalist flower pot'
-        price='Rp 500.000'
+          title='Potty'
+          image='/image 8.png'
+          desc='Minimalist flower pot'
+          price='Rp 500.000'
         />
+      </div>
+      <div className="showmore flex justify-center items-center my-7">
+        <Button variant='showmore' className='my-3 outline outline-2 outline-[#B88E2F] text-base' size='xl'>Shop Now</Button>
+      </div>
+    </section>
+
+    <section >
+      <div className='flex w-full bg-[#FCF8F3] py-6 pl-6 h-[70vh] '>
+        <div className='left w-1/3 px-8 flex flex-col justify-center items-start gap-3'>
+          <h2 className='text-[#3A3A3A] text-4xl font-bold'>50+ Beautiful rooms inspiration</h2>
+          <p>Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
+          <Button className='my-3 bg-[#B88E2F] hover:bg-[#8b6918] text-base' size='lg'>Explore More</Button>
+        </div>
+        <div className='slider w-2/3 '><MySlider /></div>
       </div>
     </section>
   </>)
