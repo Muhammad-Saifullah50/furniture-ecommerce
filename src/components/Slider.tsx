@@ -9,8 +9,8 @@ function Arrow(props: any) {
     const { className, style, onClick } = props;
     return (
         <div
-            className={className}
-            style={{ ...style, display: "block", background: "red" }}
+            className={`${className} mx-7 z-20 rounded-full`}
+            style={{ ...style, display: "block", background: "gray", }}
             onClick={onClick}
         />
     );
@@ -22,50 +22,49 @@ export default class SimpleSlider extends Component {
             dots: true,
             infinite: true,
             speed: 500,
-            slidesToShow: 2,
+            slidesToShow: 3,
             slidesToScroll: 1,
-            nextArrow: <Arrow className=''/>,
-            prevArrow: <Arrow />
+            nextArrow: <Arrow />,
+            prevArrow: <Arrow />,
         };
         return (
-            <div>
-                <Slider {...settings}>
-                   <div className=" px-2">
+            <div className="h-full pt-8">
+                <Slider {...settings} className="flex w-full h-full">
+                    <div className=" w-full relative px-2  h-80">
                         <Image
-                        src='/slider1.png'
-                        width={350}
-                        height={800}
-                        alt="sliderimage"
-                        className="object-cover"
+                            src='/slider1.png'
+                            width={300}
+                            height={300}
+                            alt="sliderimage"
+                            className="object-cover h-full"
                         />
                     </div>
-                    <div className=" px-2">
+                    <div className="w-full relative px-2 h-80">
                         <Image
-                        src='/slider2.png'
-                        width={350}
-                        height={800}
-                        alt="sliderimage"
-                        className="object-cover"
+                            src='/slider2.png'
+                            width={300}
+                            height={300}
+                            alt="sliderimage"
+                            className="object-cover h-full"
+                        />
+                    </div>
+                    <div className="w-full relative px-2 h-80">
+                        <Image
+                            src='/slider3.png'
+                            width={300}
+                            height={300}
+                            alt="sliderimage"
+                            className="object-cover h-full"
 
                         />
                     </div>
-                    <div className=" px-2">
+                    <div className="w-full relative px-2 h-80">
                         <Image
-                        src='/slider3.png'
-                        width={350}
-                        height={800}
-                        alt="sliderimage"
-                        className="object-cover"
-
-                        />
-                    </div>
-                    <div className=" px-2">
-                        <Image
-                        src='/slider4.png'
-                        width={350}
-                        height={800}
-                        alt="sliderimage"
-                        className="object-cover"
+                            src='/slider4.png'
+                            width={300}
+                            height={300}
+                            alt="sliderimage"
+                            className="object-cover h-full"
                         />
                     </div>
 

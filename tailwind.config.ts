@@ -32,6 +32,15 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        'primary-gray': '#3A3A3A',
+        'secondary-gray': '#616161',
+        'tertiary-gray': '#333333',
+        'quadruple-gray': '#666666',
+
+        'gold-primary': '#B88E2F',
+        'gold-secondary': '#8b6918'
+      },
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
       },
