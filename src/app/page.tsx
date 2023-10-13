@@ -66,7 +66,7 @@ export default function Home() {
       <div className='my-8'>
         <h3 className='text-tertiary-gray font-bold text-[32px] text-center'>Our Products</h3>
       </div>
-      <div className='grid grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-[90vw] mx-auto gap-7'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5    w-[90vw] mx-auto gap-7'>
         <ProductCard
           title='Syltherine'
           image='/image 1.png'
@@ -137,7 +137,7 @@ export default function Home() {
         <h2 className='text-secondary-gray text-xl font-semibold' >Share your setup with</h2>
         <h1 className='font-bold text-primary-gray text-[32px]'> #FuniroFurniture</h1>
       </div>
-      <div className='columns-6 xl:columns-5 lg:columns-4 md:columns-3 sm:columns-2 space-y-5 p-5'>
+      <div className='xl:columns-6 lg:columns-5 md:columns-4 sm:columns-3 columns-2 space-y-5 p-5'>
         <Image
           src='/2.png'
           width={200}

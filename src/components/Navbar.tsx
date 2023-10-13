@@ -19,8 +19,8 @@ const Navbar = () => {
                     alt='logo'
                 />
             </div>
-            <div >
-                <ul className='flex space-x-14 2xl:space-x-10 lg:space-x-8'>
+            <div className='hidden sm:flex'>
+                <ul className='hidden sm:flex space-x-8 lg:space-x-10 2xl:space-x-14'>
                     <li>
                         <Link href="/">Home</Link>
                     </li>
