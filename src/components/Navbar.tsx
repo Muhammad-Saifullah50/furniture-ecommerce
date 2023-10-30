@@ -12,15 +12,10 @@ const Navbar = () => {
                     height={32}
                     alt='logoicon'
                 />
-                <Image
-                    src="/logo.png"
-                    width={130}
-                    height={41}
-                    alt='logo'
-                />
+               <h1 className='hidden sm:flex font-extrabold text-4xl'>Furnitees</h1>
             </div>
             <div className='hidden sm:flex'>
-                <ul className='hidden sm:flex space-x-8 lg:space-x-10 2xl:space-x-14'>
+                <ul className='hidden md:flex space-x-8 lg:space-x-10 2xl:space-x-14'>
                     <li>
                         <Link href="/">Home</Link>
                     </li>
@@ -35,7 +30,7 @@ const Navbar = () => {
                     </li>
                 </ul>
             </div>
-            <div className='flex space-x-8'>
+            <div className='flex space-x-4 sm:space-x-8'>
                 <Image
                     src='account.svg'
                     height={28}

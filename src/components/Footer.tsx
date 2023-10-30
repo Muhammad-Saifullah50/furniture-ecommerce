@@ -3,8 +3,8 @@ import { Button } from './ui/button'
 
 const Footer = () => {
     return (
-        <footer>
-            <div className='flex justify-between p-10 border-t-[1px] border-gray-200 mt-5'>
+        <footer className='w-full'>
+            <div className='flex flex-wrap p-10 w-full border-t-[1px] border-gray-200 mt-5'>
 
                 <div className='w-2/5 flex flex-col gap-6'>
                     <div className='text-black font-bold text-2xl'>Furniro.</div>

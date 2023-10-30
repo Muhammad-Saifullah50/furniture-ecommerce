@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className='font-poppins'>
         <Navbar />
-        {children}
+        <section className='px-5'>
+          {children}
+        </section>
         <Footer />
       </body>
     </html>
