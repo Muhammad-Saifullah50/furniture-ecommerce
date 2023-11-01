@@ -1,11 +1,11 @@
 import { ProductCard, MySlider } from '@/components'
 import { Button } from '@/components/ui/button'
-import { getAllProducts } from '@/lib/products'
+import { fetchProducts } from '@/lib/products'
 import Image from 'next/image'
 import { Product } from './shop/page'
 
 export default async function Home() {
-  const response = await getAllProducts()
+  const response = await fetchProducts()
   const products = await response.json()
   return (<>
     <section>
@@ -72,6 +72,7 @@ export default async function Home() {
         {products.data.map((product: Product) => (
           <ProductCard
             key={product.id}
+            id={product.id}
             title={product.name}
             shrtdesc={product.shortDesc}
             price={product.price}

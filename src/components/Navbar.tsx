@@ -32,25 +32,25 @@ const Navbar = () => {
             </div>
             <div className='flex space-x-4 sm:space-x-8'>
                 <Image
-                    src='account.svg'
+                    src='/account.svg'
                     height={28}
                     alt='icon'
                     width={28}
                 />
                 <Image
-                    src="search.svg"
+                    src="/search.svg"
                     height={25}
                     alt='icon'
                     width={25}
                 />
                 <Image
-                    src="heart.svg"
+                    src="/heart.svg"
                     height={25}
                     alt='icon'
                     width={25}
                 />
                 <Image
-                    src="cart.svg"
+                    src="/cart.svg"
                     height={27}
                     alt='icon'
                     width={27}

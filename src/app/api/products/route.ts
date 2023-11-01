@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async () => {
     try {
-        const products = await db.products.findMany()
+        const products = await db.products.findMany({
+            orderBy: [{ createdAt: "desc" }]
+        })
         return NextResponse.json(
             { message: "Data retrieved successfully", data: products },
             { status: 200 })
