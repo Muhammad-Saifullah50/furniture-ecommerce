@@ -1,9 +1,24 @@
 import { ProductCard } from '@/components'
 import { Button } from '@/components/ui/button'
+import { getAllProducts } from '@/lib/products'
 import Image from 'next/image'
 import React from 'react'
 
-const ShopPage = () => {
+export interface Product {
+  id: string
+  name: string
+  desc: string
+  shortDesc: string
+  createdAt: string
+  updatedAt: string
+  price: string
+  image: string
+}
+const ShopPage = async () => {
+
+  const response = await getAllProducts()
+  const products = await response.json()
+  // console.log(products)
   return (
     <section>
       <div className='relative z-0 w-full flex items-center justify-end max-sm:h-[40vh] h-[50vh] '>
@@ -19,83 +34,21 @@ const ShopPage = () => {
       </div>
 
       <div className='bar h-24 bg-[#F9F1E7]'>
-        Dummy Text
+        pagination
       </div>
 
       <section className='mt-10'>
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-7'>
-          <ProductCard
-            title='Syltherine'
-            image='/image 1.png'
-            desc='Stylish cafe chair'
-            price='Rp 2.500.000'
-          />
-          <ProductCard
-            title='Leviosa'
-            image='/image 2.png'
-            desc='Stylish cafe chair'
-            price='Rp 2.500.000'
-          />
-          <ProductCard
-            title='Lolito'
-            image='/image 3.png'
-            desc='Luxury big sofa'
-            price='Rp 7.000.000'
-          />
-          <ProductCard
-            title='Respira'
-            image='/image 4.png'
-            desc='Outdoor bar table and store'
-            price='Rp 500.000'
-          />
-          <ProductCard
-            title='Muggo'
-            image='/image 5.png'
-            desc='Small Mug'
-            price='Rp 150.000'
-          />
-          <ProductCard
-            title='Grifo'
-            image='/image 6.png'
-            desc='Night Lamp'
-            price='Rp 1.500.000'
-          />
-          <ProductCard
-            title='Pingky'
-            image='/image 7.png'
-            desc='Cute bed set'
-            price='Rp 2.500.000'
-          />
-          <ProductCard
-            title='Potty'
-            image='/image 8.png'
-            desc='Minimalist flower pot'
-            price='Rp 500.000'
-          />
-          <ProductCard
-            title='Muggo'
-            image='/image 5.png'
-            desc='Small Mug'
-            price='Rp 150.000'
-          />
-          <ProductCard
-            title='Grifo'
-            image='/image 6.png'
-            desc='Night Lamp'
-            price='Rp 1.500.000'
-          />
-          <ProductCard
-            title='Pingky'
-            image='/image 7.png'
-            desc='Cute bed set'
-            price='Rp 2.500.000'
-          />
-          <ProductCard
-            title='Potty'
-            image='/image 8.png'
-            desc='Minimalist flower pot'
-            price='Rp 500.000'
-          />
+          {products.data.map((product: Product) => (
+            <ProductCard
+              key={product.id}
+              title={product.name}
+              shrtdesc={product.shortDesc}
+              price={product.price}
+              image={product.image}
+
+            />
+          ))}
         </div>
 
         <div className='btns flex justify-center items-center gap-4 my-10'>
