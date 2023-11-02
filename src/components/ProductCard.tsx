@@ -12,10 +12,10 @@ interface ProductCardProps {
 }
 const ProductCard = ({ id, title, image, shrtdesc, price }: ProductCardProps) => {
     return (<>
-            <div className="w-full">
+            <div className="w-full ">
             <Link href={`/shop/${id}`}>
 
-                <div className="w-full h-2/3  relative z-0 group">
+                <div className="w-full h-2/3 relative z-0 group">
                     <Image
                         src={image}
                         alt={title}

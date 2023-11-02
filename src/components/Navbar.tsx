@@ -1,8 +1,14 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-
+import React, { useState } from 'react'
+import { usePathname } from 'next/navigation'
 const Navbar = () => {
+    const pathname = usePathname();
+
+    const isActive = (path: string) => {
+        return (pathname === path)
+    }
     return (
         <nav className='flex justify-between px-9 w-full h-full py-3 items-center'>
             <div className='flex space-x-2'>
@@ -12,21 +18,27 @@ const Navbar = () => {
                     height={32}
                     alt='logoicon'
                 />
-               <h1 className='hidden sm:flex font-extrabold text-4xl'>Furnitees</h1>
+                <h1 className='hidden sm:flex font-extrabold text-4xl'>Furnitees</h1>
             </div>
             <div className='hidden sm:flex'>
                 <ul className='hidden md:flex space-x-8 lg:space-x-10 2xl:space-x-14'>
-                    <li>
+                    <li
+                        className={`${isActive('/') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary' : ''}`}
+                    >
                         <Link href="/">Home</Link>
                     </li>
-                    <li>
+                    <li
+                        className={`${isActive('/shop') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary' : ''}`}>
                         <Link href="/shop">Shop</Link>
                     </li>
-                    <li>
-                        <Link href="/about">About</Link>
+                    <li
+                        className={`${isActive('/cart') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary' : ''}`}
+                    >
+                        <Link href="/cart">My Cart</Link>
                     </li>
-                    <li>
-                        <Link href="/contact">Contact</Link>
+                    <li className={`${isActive('/sell') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary' : ''}`}
+                    >
+                        <Link href="/sell">Become a Seller</Link>
                     </li>
                 </ul>
             </div>
@@ -39,12 +51,6 @@ const Navbar = () => {
                 />
                 <Image
                     src="/search.svg"
-                    height={25}
-                    alt='icon'
-                    width={25}
-                />
-                <Image
-                    src="/heart.svg"
                     height={25}
                     alt='icon'
                     width={25}
