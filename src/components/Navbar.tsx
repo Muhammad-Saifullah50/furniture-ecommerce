@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
+import { Button } from './ui/button'
 const Navbar = () => {
     const pathname = usePathname();
     const session = useSession()
@@ -45,10 +46,15 @@ const Navbar = () => {
                     </li>
                 </ul>
             </div>
-            <div className='flex space-x-4 sm:space-x-8'>
+            <div className='flex space-x-4 sm:space-x-8 '>
                 <Image
-                    src={`${session ? session?.data?.user?.image : '/account.svg'} `}
-                    height={28}
+                    //@ts-ignore
+                    src={session.status === 'authenticated'
+                        ? session?.data?.user?.image === ''
+                            ? '/profile.svg'
+                            : session?.data?.user?.image
+                        : '/account.svg'
+                    } height={28}
                     alt='icon'
                     width={28}
                     className='rounded-full'
@@ -59,12 +65,23 @@ const Navbar = () => {
                     alt='icon'
                     width={25}
                 />
-                <Image
-                    src="/cart.svg"
-                    height={27}
-                    alt='icon'
-                    width={27}
-                />
+                <div className='group'
+                >
+                    <Image
+                        src="/cart.svg"
+                        height={27}
+                        alt='icon'
+                        width={27}
+
+                    />
+                    <div className='group-hover:flex flex-col
+                 hidden absolute z-50  p-4 top-5 bg-gold-primary bg-opacity-20'>
+                        Signed in as {session?.data?.user?.name}
+
+                        <Button onClick={() => signOut()}>Sign out</Button>
+                    </div>
+                </div>
+
             </div>
         </nav>
     )

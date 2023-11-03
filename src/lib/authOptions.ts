@@ -16,26 +16,29 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize(credentials, req) {
+        try {
+          const { username, email, password } = credentials as any;
 
-        const { username, email, password } = credentials as any;
+          const salt = await genSalt(10);
+          const hashedPassword = hashSync(password, salt);
 
-        const salt = await genSalt(10);
-        const hashedPassword = hashSync(password, salt);
-
-        const existingUser = await db.users.findUnique({ where: { email: email } })
-
-        if (!existingUser) {
-          const user = await db.users.create({
-            data: {
-              username: username,
-              email: email,
-              password: hashedPassword,
-              image: ''
-            }
-          })
-          return user
+          const existingUser = await db.users.findUnique({ where: { email: email } })
+          if (!existingUser) {
+            const user = await db.users.create({
+              data: {
+                username: username,
+                email: email,
+                password: hashedPassword,
+                image: ''
+              }
+            })
+            return user
+          }
+          else return existingUser
+        } catch (error) {
+          console.log(error)
         }
-        else return existingUser
+
       }
     }),
     GoogleProvider({
