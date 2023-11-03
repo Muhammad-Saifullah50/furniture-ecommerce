@@ -3,8 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 const Navbar = () => {
     const pathname = usePathname();
+    const session = useSession()
+    console.log(session)
 
     const isActive = (path: string) => {
         return (pathname === path)
@@ -13,7 +16,7 @@ const Navbar = () => {
         <nav className='flex justify-between px-9 w-full h-full py-3 items-center'>
             <div className='flex space-x-2'>
                 <Image
-                    src="/logoicon.png"
+                    src='/logoicon.png'
                     width={50}
                     height={32}
                     alt='logoicon'
@@ -44,10 +47,11 @@ const Navbar = () => {
             </div>
             <div className='flex space-x-4 sm:space-x-8'>
                 <Image
-                    src='/account.svg'
+                    src={`${session ? session?.data?.user?.image : '/account.svg'} `}
                     height={28}
                     alt='icon'
                     width={28}
+                    className='rounded-full'
                 />
                 <Image
                     src="/search.svg"
