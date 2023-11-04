@@ -8,15 +8,18 @@ import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import { ZodError } from 'zod'
 import { RotatingLines } from 'react-loader-spinner'
+import { useRouter } from 'next/navigation'
 
 
-const LoginPage = () => {
+const SigninPage = () => {
   const { data: session } = useSession();
   console.log(session, 'session')
 
   const username = useRef('')
   const email = useRef('')
   const password = useRef('')
+
+  const router = useRouter()
 
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -25,20 +28,27 @@ const LoginPage = () => {
     e.preventDefault()
 
     try {
-     setLoading(true)
+      setLoading(true)
       const validation = SignInSchema.parse({
         username: username.current,
         email: email.current,
         password: password.current,
       })
 
-      await signIn('credentials', {
+      const result = await signIn('credentials', {
         username: username.current,
         email: email.current,
         password: password.current,
-        redirect: true,
-        callbackUrl: 'http://localhost:3000'
+        redirect: false,
+        callbackUrl: 'http://localhost:3000/sell'
       })
+
+      console.log(result)
+      if (result?.error) {
+        setError(result.error)
+      } else {
+        router.push('/sell')
+      }
     } catch (error) {
       if (error instanceof ZodError) {
         const errmsg = error.flatten().fieldErrors;
@@ -72,20 +82,20 @@ const LoginPage = () => {
 
         <div>
           <Label>Name</Label>
-          <Input placeholder='Your name' onChange={(e) => (username.current = e.target.value)} />
+          <Input placeholder='Your username' onChange={(e) => (username.current = e.target.value)} />
         </div>
         <div>
           <Label>Email</Label>
-          <Input placeholder='Your email address'
+          <Input placeholder='Your email address' type='email'
             onChange={(e) => (email.current = e.target.value)} />
         </div>
         <div>
           <Label>Password</Label>
-          <Input placeholder='Your password' onChange={(e) => (password.current = e.target.value)} />
+          <Input type='password' placeholder='Your password' onChange={(e) => (password.current = e.target.value)} />
         </div>
-        <Button 
-        className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base' 
-        disabled={loading}
+        <Button
+          className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base'
+          disabled={loading}
         >Sign in with credentials {loading && (<RotatingLines
           strokeColor="white"
           strokeWidth="5"
@@ -98,22 +108,22 @@ const LoginPage = () => {
           or
           <div className='bg-gray-300 w-full  h-[2px]' />
         </span>
-        
+
       </form>
       <Button
-          className='bg-white text-base text-black w-1/2 mt-4 hover:bg-transparent border-black border-[1px] py-2 hover:bg-slate-100 flex gap-5'
-          onClick={() => signIn('google')}
-        >
-          <Image
-            src={'/google.svg'}
-            width={35}
-            height={35}
-            alt='google'
-          />
-          Sign in with Google </Button>
+        className='bg-white text-base text-black w-1/2 mt-4 hover:bg-transparent border-black border-[1px] py-2 hover:bg-slate-100 flex gap-5'
+        onClick={() => signIn('google')}
+      >
+        <Image
+          src={'/google.svg'}
+          width={35}
+          height={35}
+          alt='google'
+        />
+        Sign in with Google </Button>
     </section>
 
   </>)
 }
 
-export default LoginPage
+export default SigninPage

@@ -47,40 +47,40 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className='flex space-x-4 sm:space-x-8 '>
-                <Image
-                    //@ts-ignore
-                    src={session.status === 'authenticated'
-                        ? session?.data?.user?.image === ''
-                            ? '/profile.svg'
-                            : session?.data?.user?.image
-                        : '/account.svg'
-                    } height={28}
-                    alt='icon'
-                    width={28}
-                    className='rounded-full'
-                />
+                <div className='group'>
+                    <Image
+                        //@ts-ignore
+                        src={session.status === 'authenticated'
+                            ? session?.data?.user?.image === ''
+                                ? '/profile.svg'
+                                : session?.data?.user?.image
+                            : '/account.svg'
+                        } height={28}
+                        alt='icon'
+                        width={28}
+                        className='rounded-full mt-1'
+                    />
+                    {session && session.status === 'authenticated' && (<div className='group-hover:flex flex-col 
+                 hidden absolute z-50  gap-4 w-44 py-10 top-12 px-4 right-10 bg-white  shadow-2xl text-base'>
+                        <p> Signed in as <span className='font-semibold'>{session?.data?.user?.name}</span></p>
+
+                        <Button className='bg-gold-primary hover:bg-gold-secondary' onClick={() => signOut()}>Sign out</Button>
+                    </div>)}
+                </div>
                 <Image
                     src="/search.svg"
                     height={25}
                     alt='icon'
                     width={25}
                 />
-                <div className='group'
-                >
-                    <Image
-                        src="/cart.svg"
-                        height={27}
-                        alt='icon'
-                        width={27}
+                <Image
+                    src="/cart.svg"
+                    height={27}
+                    alt='icon'
+                    width={27}
 
-                    />
-                    <div className='group-hover:flex flex-col
-                 hidden absolute z-50  p-4 top-5 bg-gold-primary bg-opacity-20'>
-                        Signed in as {session?.data?.user?.name}
+                />
 
-                        <Button onClick={() => signOut()}>Sign out</Button>
-                    </div>
-                </div>
 
             </div>
         </nav>
