@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@radix-ui/react-label"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { useState, useRef } from "react"
+import { useState, useRef, ChangeEvent } from "react"
 import { RotatingLines } from "react-loader-spinner"
 const SellPage = () => {
 
@@ -19,7 +19,7 @@ const SellPage = () => {
     const productName = useRef('')
     const shrtDesc = useRef('')
     const desc = useRef('')
-    const price = useRef('')
+    const price = useRef(0)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -30,7 +30,7 @@ const SellPage = () => {
                 desc: desc.current,
                 shortDesc: shrtDesc.current,
                 price: price.current,
-                image: image.current
+                imgPath: image.current
             }
 
             const response = await fetch('/api/products', {
@@ -41,9 +41,15 @@ const SellPage = () => {
                 body: JSON.stringify(productData)
             })
 
+            
             const result = await response.json()
-            console.log(result)
-            router.push('/')
+
+            if (result.status === 400 || result.status === 500) {
+                setError(result.message)
+            } else {
+                router.push('/')
+            }
+
         } catch (error: any) {
             throw new Error(`error posting product ${error?.message}`)
         } finally {
@@ -69,6 +75,12 @@ const SellPage = () => {
         };
     };
 
+    const handlePrice = (e: ChangeEvent<HTMLInputElement>) => {
+        const inputPriceValue = e.target.value
+        const numericPriceValue = parseInt(inputPriceValue)
+
+        price.current = numericPriceValue
+    }
     return (
         <section className="flex justify-center items-center flex-col mt-10 gap-5">
             <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Hello <span className="text-black capitalize">{session?.data?.user?.name}</span>, what are you going to sell today??</h2>
@@ -107,7 +119,9 @@ const SellPage = () => {
                 </div>
                 <div>
                     <Label >Price</Label>
-                    <Input placeholder='Provide a price of your product' onChange={(e) => (price.current = e.target.value)} />
+                    <Input placeholder='Provide a price of your product'
+                        type="number"
+                        onChange={handlePrice} />
                 </div>
                 <Button
                     className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base'

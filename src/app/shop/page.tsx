@@ -39,9 +39,8 @@ const ShopPage = async () => {
       </div>
 
       <section className='mt-10'>
-        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-7'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-x-6 gap-y-28'>
           {products.data.map((product: Product) => (
-            
               <ProductCard
                 key={product.id}
                 id={product.id} 
@@ -51,7 +50,6 @@ const ShopPage = async () => {
                 image={product.image}
 
               />
-            
           ))}
         </div>
 
