@@ -4,6 +4,7 @@ import Provider from '@/providers/SessionProvider'
 import { getServerSession } from 'next-auth'
 
 import type { Metadata } from 'next'
+import { authOptions } from '@/lib/authOptions'
 
 export const metadata: Metadata = {
   title: 'Furnitees',
@@ -16,7 +17,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   return (
     <html lang="en">
       <body className='font-poppins'>

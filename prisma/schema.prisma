@@ -19,13 +19,17 @@ model Products {
   updatedAt DateTime @updatedAt
   price     String
   image     String
+  author    Users    @relation(fields: [usersId], references: [id])
+  usersId   String   @db.ObjectId
 }
 
 model Users {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  email     String   @unique
-  password  String?   @unique
-  image     String? 
-  createdAt DateTime @default(now())
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String     @unique
+  password  String?    @unique
+  image     String?
+  createdAt DateTime   @default(now())
+  Products  Products[]
 }
+

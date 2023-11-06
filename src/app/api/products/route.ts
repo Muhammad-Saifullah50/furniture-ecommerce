@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server"
 import { v2 as cloudinary } from "cloudinary";
 import { ProductSchema } from "@/validations/ProductSchema";
 import { ZodError } from "zod";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+
 
 export const GET = async () => {
     try {
@@ -26,6 +29,8 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 export const POST = async (request: NextRequest) => {
+    const session = await getServerSession(authOptions)
+
     try {
         const response = await request.json()
         const { name, createdAt, updatedAt, price, imgPath, desc, shortDesc } = response
@@ -52,7 +57,13 @@ export const POST = async (request: NextRequest) => {
                 shortDesc,
                 desc,
                 price,
-                image
+                image,
+                author: {
+                    connect: {
+                        //@ts-ignore
+                        id: session?.user?.id
+                    }
+                } 
             }
             const validate = ProductSchema.parse(dataToValidate)
 
@@ -64,12 +75,35 @@ export const POST = async (request: NextRequest) => {
                     createdAt,
                     updatedAt,
                     price,
-                    image
+                    image,
+                    author: {
+                        connect: {
+                            //@ts-ignore
+                            id: session?.user?.id
+                        }
+                    } 
+                }
+            })
+
+            // todo : add product to user
+            const addProductToUser = await db.users.update({
+                where: {
+                    //@ts-ignore
+                    id: session?.user?.id
+                },
+                data: {
+                    Products: {
+                        connect: {
+                            id: newProduct.id
+                        }
+                    }
                 }
             })
             return NextResponse.json(
-                { message: "Product added successfully", data: newProduct ,
-                 status: 200 })
+                {
+                    message: "Product added successfully", data: newProduct,
+                    status: 200
+                })
         } catch (error) {
             if (error instanceof ZodError) {
                 const errmsg = error.flatten().fieldErrors;

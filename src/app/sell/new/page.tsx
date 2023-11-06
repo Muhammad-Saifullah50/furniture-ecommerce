@@ -19,7 +19,7 @@ const SellPage = () => {
     const productName = useRef('')
     const shrtDesc = useRef('')
     const desc = useRef('')
-    const price = useRef(0)
+    const price = useRef('')
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -43,6 +43,7 @@ const SellPage = () => {
 
             
             const result = await response.json()
+            console.log(result, 'result')
 
             if (result.status === 400 || result.status === 500) {
                 setError(result.message)
@@ -74,13 +75,6 @@ const SellPage = () => {
             }
         };
     };
-
-    const handlePrice = (e: ChangeEvent<HTMLInputElement>) => {
-        const inputPriceValue = e.target.value
-        const numericPriceValue = parseInt(inputPriceValue)
-
-        price.current = numericPriceValue
-    }
     return (
         <section className="flex justify-center items-center flex-col mt-10 gap-5">
             <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Hello <span className="text-black capitalize">{session?.data?.user?.name}</span>, what are you going to sell today??</h2>
@@ -121,7 +115,7 @@ const SellPage = () => {
                     <Label >Price</Label>
                     <Input placeholder='Provide a price of your product'
                         type="number"
-                        onChange={handlePrice} />
+                        onChange={(e) => (price.current = e.target.value)} />
                 </div>
                 <Button
                     className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base'

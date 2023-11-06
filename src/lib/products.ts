@@ -1,4 +1,7 @@
+import { getServerSession } from "next-auth"
 import { db } from "./prisma"
+import { authOptions } from "./authOptions"
+
 
 export const fetchProducts = async (pageNumber = 1, pageSize = 10) => {
     try {
@@ -20,6 +23,20 @@ export const fetchProductById = async (id: string) => {
         const product = await db.products.findUnique({ where: { id: id } })
         // console.log(product)
         return product
+    } catch (error: any) {
+        throw new Error(`Error fetching product ${error?.message}`)
+    }
+}
+
+export const fetchProductsByUserId = async (id: string) => {
+    try {
+
+        const userProducts = await db.products.findMany({
+            //@ts-ignore
+            where: { usersId: id }
+        })
+        // console.log(userProducts)
+        return userProducts
     } catch (error: any) {
         throw new Error(`Error fetching product ${error?.message}`)
     }

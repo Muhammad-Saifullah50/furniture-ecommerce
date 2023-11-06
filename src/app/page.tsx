@@ -3,10 +3,13 @@ import { Button } from '@/components/ui/button'
 import { fetchProducts } from '@/lib/products'
 import Image from 'next/image'
 import { Product } from './shop/page'
+import Link from 'next/link'
 
 export default async function Home() {
+  
   const response = await fetchProducts()
   const products = await response.json()
+  // console.log(products, 'products')
   return (<>
     <section>
       <div className='relative z-0 w-full flex items-center justify-end max-sm:h-[40vh] h-[80vh] '>
@@ -68,8 +71,8 @@ export default async function Home() {
       <div className='my-8'>
         <h3 className='text-tertiary-gray font-bold text-[32px] text-center'>Our Products</h3>
       </div>
-      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5    w-[90vw] mx-auto gap-7'>
-        {products.data.map((product: Product) => (
+      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-x-6 gap-y-28 my-10 '>
+        {products?.data?.map((product: Product) => (
           <ProductCard
             key={product.id}
             id={product.id}
@@ -81,8 +84,9 @@ export default async function Home() {
           />
         ))}
       </div>
-      <div className="showmore flex justify-center items-center my-7">
-        <Button variant='showmore' className='my-3 outline outline-2 outline-[#B88E2F] text-base' size='xl'>Shop Now</Button>
+      <div className="showmore flex justify-center items-center mt-28">
+        <Link href={'/shop'}>
+          <Button variant='showmore' className='my-3 outline outline-2 outline-[#B88E2F] text-base' size='xl'>Shop Now</Button></Link>
       </div>
     </section>
 
