@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 
 const SigninPage = () => {
   const { data: session } = useSession();
-  console.log(session, 'session')
+  // console.log(session, 'session')
 
   const username = useRef('')
   const email = useRef('')

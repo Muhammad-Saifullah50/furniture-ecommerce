@@ -1,6 +1,4 @@
-import { getServerSession } from "next-auth"
 import { db } from "./prisma"
-import { authOptions } from "./authOptions"
 
 
 export const fetchProducts = async (pageNumber = 1, pageSize = 10) => {

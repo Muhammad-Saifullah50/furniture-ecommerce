@@ -60,12 +60,13 @@ const Navbar = () => {
                         width={28}
                         className='rounded-full mt-1'
                     />
-                    {session && session.status === 'authenticated' && (<div className='group-hover:flex flex-col 
+                    <div className='group-hover:flex flex-col 
                  hidden absolute z-50  gap-4 w-44 py-10 top-12 px-4 right-10 bg-white  shadow-2xl text-base'>
-                        <p> Signed in as <span className='font-semibold'>{session?.data?.user?.name}</span></p>
+                        {session.status === 'authenticated' ? <p> Signed in as <span className='font-semibold'>{session?.data?.user?.name}</span></p> : (<><p>Not Signed in</p>
+                            <Link href={'/signin'}><Button className='bg-gold-primary hover:bg-gold-secondary w-full'>Sign In</Button></Link></>)}
 
-                        <Button className='bg-gold-primary hover:bg-gold-secondary' onClick={() => signOut()}>Sign out</Button>
-                    </div>)}
+                        {session.status === 'authenticated' ? (<Button className='bg-gold-primary hover:bg-gold-secondary' onClick={() => signOut()}>Sign out</Button>) : null}
+                    </div>
                 </div>
                 <Image
                     src="/search.svg"
