@@ -1,5 +1,4 @@
 import AddToCart from '@/components/AddToCart'
-import Counter from '@/components/Counter'
 import { fetchProductById } from '@/lib/products'
 import Image from 'next/image'
 import React from 'react'
@@ -28,9 +27,12 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
                     {product?.shortDesc}
                 </div>
 
-                <div className='flex justify-between mt-14'>
-                    <Counter />
-                    <AddToCart />
+                <div className='mt-14'>
+                    <AddToCart
+                        name={product?.name}
+                        image={product?.image}
+                        price={product?.price}
+                    />
                 </div>
             </div>
         </section>
@@ -43,7 +45,7 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
         <div className='bg-gray-200 w-full  h-[2px]' />
 
         <div className='flex my-10 gap-10 justify-center items-center'>
-        <h3 className='font-semibold'>Posted By</h3>
+            <h3 className='font-semibold'>Posted By</h3>
 
             <div>
                 <Image
