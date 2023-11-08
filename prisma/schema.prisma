@@ -40,6 +40,6 @@ model Cart {
   image    String
   quantity Int
   price    String
-  Users    Users?  @relation(fields: [usersId], references: [id])
+  user     Users?  @relation(fields: [usersId], references: [id])
   usersId  String? @db.ObjectId
 }
