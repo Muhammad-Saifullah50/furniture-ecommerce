@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Button } from './ui/button'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   name: string
@@ -8,8 +9,10 @@ interface Props {
   price: string
 }
 const AddToCart = ({ name, image, price }: Props) => {
-  const [count, setCount] = useState(1)
-
+  const [quantity, setQuantity] = useState(1)
+  const session = useSession()
+  //@ts-ignore
+const userId = session?.data?.user?.id
   const handleClick = async () => {
     const response = await fetch('/api/cart', {
       method: 'POST',
@@ -17,19 +20,20 @@ const AddToCart = ({ name, image, price }: Props) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        userId,
         name,
         image,
         price,
-        count
+        quantity
       }),
     })
   }
   return (
     <div className='flex justify-between'>
       <div className='flex gap-3 justify-center items-center text-lg'>
-        <Button className=' text-lg' onClick={() => setCount(count - 1)} disabled={count === 1}>-</Button>
-        <span>{count}</span>
-        <Button className=' text-lg' onClick={() => setCount(count + 1)}>+</Button>
+        <Button className=' text-lg' onClick={() => setQuantity(quantity - 1)} disabled={quantity === 1}>-</Button>
+        <span>{quantity}</span>
+        <Button className=' text-lg' onClick={() => setQuantity(quantity + 1)}>+</Button>
       </div>
 
       <Button

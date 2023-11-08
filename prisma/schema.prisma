@@ -31,5 +31,15 @@ model Users {
   image     String?
   createdAt DateTime   @default(now())
   Products  Products[]
+  cart      Cart[]
 }
 
+model Cart {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  image    String
+  quantity Int
+  price    String
+  Users    Users?  @relation(fields: [usersId], references: [id])
+  usersId  String? @db.ObjectId
+}
