@@ -63,7 +63,7 @@ export const POST = async (request: NextRequest) => {
                         //@ts-ignore
                         id: session?.user?.id
                     }
-                } 
+                }
             }
             const validate = ProductSchema.parse(dataToValidate)
 
@@ -81,7 +81,7 @@ export const POST = async (request: NextRequest) => {
                             //@ts-ignore
                             id: session?.user?.id
                         }
-                    } 
+                    }
                 }
             })
 
@@ -117,6 +117,62 @@ export const POST = async (request: NextRequest) => {
         }
 
     } catch (error: any) {
+        return NextResponse.json(
+            {
+                message: `Something went wrong ${error?.message}`,
+                status: 500
+            })
+    }
+}
+
+
+export const PATCH = async (request: NextRequest) => {
+    const response = await request.json()
+
+    const options = {
+        use_filename: true, unique_filename: false,
+        overwrite: true,
+        trasformation: [{ width: 1000, height: 752, crop: "scale" }],
+    };
+
+    const imgResult = await cloudinary.uploader.upload(response.imgPath, options);
+    const image = imgResult?.secure_url
+
+    try {
+        const dataToValidate = {
+            name: response.name,
+            desc: response.desc,
+            shortDesc: response.shortDesc,
+            price: response.price,
+            image
+        }
+        const validate = ProductSchema.parse(dataToValidate)
+
+
+        const updatedProduct = await db.products.update({
+            where: { id: response.id },
+            data: {
+                name: response.name,
+                desc: response.desc,
+                shortDesc: response.shortDesc,
+                price: response.price,
+                image
+            }
+        })
+
+        return NextResponse.json(
+            { message: 'Product updated successfully', status: 200 }
+        )
+    } catch (error: any) {
+        if (error instanceof ZodError) {
+            const errmsg = error.flatten().fieldErrors;
+            const firstError = Object.keys(errmsg)[0]
+            const firstErrorValue = errmsg[firstError]
+
+            return NextResponse.json(
+                { message: firstErrorValue, status: 400 }
+            )
+        }
         return NextResponse.json(
             {
                 message: `Something went wrong ${error?.message}`,

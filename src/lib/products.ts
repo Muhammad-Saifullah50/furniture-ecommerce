@@ -14,17 +14,6 @@ export const fetchProducts = async (pageNumber = 1, pageSize = 10) => {
     }
 }
 
-export const fetchProductById = async (id: string) => {
-    'use server'
-    try {
-
-        const product = await db.products.findUnique({ where: { id: id } })
-        const productAuthor = await db.users.findUnique({ where: { id: product?.usersId } })
-        return { product, productAuthor }
-    } catch (error: any) {
-        throw new Error(`Error fetching product ${error?.message}`)
-    }
-}
 
 export const fetchProductsByUserId = async (id: string) => {
     try {

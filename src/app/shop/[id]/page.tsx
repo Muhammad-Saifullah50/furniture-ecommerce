@@ -1,5 +1,5 @@
 import AddToCart from '@/components/AddToCart'
-import { fetchProductById } from '@/lib/products'
+import { fetchProductById } from '@/lib/products.actions'
 import Image from 'next/image'
 import React from 'react'
 
