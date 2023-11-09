@@ -63,10 +63,19 @@ export const getUserCartItems = async (userId: string) => {
                 usersId: userId
             }
         })
-// console.log(cartItems, 'cartItems')
+        // console.log(cartItems, 'cartItems')
         return cartItems
     } catch (error: any) {
         if (error) notFound()
         throw new Error(`Error fetching cart items ${error?.message}`)
     }
 }
+
+export const deleteCartItem = async (id: string) => {
+    try {
+        const itemToDelete = await db.cart.delete({ where: { id: id } })
+    } catch (error:any) {
+        throw new Error(`Error deleting product ${error?.message}`)
+    }
+   
+} 

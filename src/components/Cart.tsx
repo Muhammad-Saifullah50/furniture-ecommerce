@@ -1,9 +1,11 @@
 'use client'
 import { getUserCartItems } from '@/lib/products.actions'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { Button } from './ui/button'
+import { CartItem } from '.'
 
 
 const Cart = () => {
@@ -17,8 +19,14 @@ const Cart = () => {
             setCartItems(cartItems)
         }
         getData()
-    }, [])
+    }, [cartItems.length])
 
+    const totalPrice = cartItems.reduce((total, item) => {
+        //@ts-ignore
+        return total + parseFloat(item.price) * item.quantity
+    }, 0)
+
+    
     return (
         <div>
             <Sheet>
@@ -30,17 +38,30 @@ const Cart = () => {
                         width={27}
 
                     /></SheetTrigger>
-                <SheetContent>
+                <SheetContent className='px-6'>
                     <SheetHeader>
-                        <SheetTitle>Your Cart</SheetTitle>
+                        <SheetTitle>Your Shopping Cart</SheetTitle>
                         <SheetDescription>
                             {cartItems.map((item: any) => (
-                                <div className='flex'>
-                                    <Image src={item.image} alt={item.name} width={50} height={50} className='rounded-lg object-fill w-10 h-10'/>
-                                </div>
+                                <CartItem
+                                name={item.name}
+                                price={item.price}
+                                image={item.image}
+                                quantity={item.quantity}
+                                key={item.id}
+                                itemId={item.id}
+                                />
                             ))}
+
                         </SheetDescription>
                     </SheetHeader>
+                    <SheetFooter >
+                        <div className='flex flex-col items-center w-full font-semibold gap-8 mt-8'>
+                            <p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p>
+                            <Button className='w-full text-base font-semibold'>Checkout</Button>
+                        </div>
+
+                    </SheetFooter>
                 </SheetContent>
             </Sheet>
 

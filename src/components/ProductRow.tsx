@@ -58,7 +58,8 @@ const ProductRow = ({ id, name, image, createdAt, price }: ProductRowProps) => {
                 <Button
                     size={'icon'}
                     variant={'destructive'}
-                    disabled={loading}>
+                    disabled={loading}
+                    onClick={handleDelete}>
                     {loading ? (<RotatingLines
                         strokeColor="white"
                         strokeWidth="5"
@@ -70,7 +71,7 @@ const ProductRow = ({ id, name, image, createdAt, price }: ProductRowProps) => {
                         alt={'edit'}
                         width={20}
                         height={20}
-                        onClick={handleDelete}
+                        
                     />)}
 
                 </Button>

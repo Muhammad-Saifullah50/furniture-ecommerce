@@ -4,6 +4,7 @@ import MySlider from "./Slider";
 import Footer from "./Footer";
 import SellerDashboard from "./SellerDashboard";
 import ProductRow from "./ProductRow";
+import CartItem from "./CartItem";
 
 export {
     Navbar,
@@ -12,4 +13,5 @@ export {
     Footer,
     SellerDashboard,
     ProductRow,
+    CartItem
 }
