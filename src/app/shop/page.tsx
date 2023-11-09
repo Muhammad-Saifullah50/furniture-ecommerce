@@ -1,6 +1,6 @@
 import { ProductCard } from '@/components'
 import { Button } from '@/components/ui/button'
-import { fetchProducts } from '@/lib/products'
+import { fetchProducts } from '@/lib/products.actions'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'

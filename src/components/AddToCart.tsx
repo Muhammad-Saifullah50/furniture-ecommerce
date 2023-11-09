@@ -13,6 +13,7 @@ const AddToCart = ({ name, image, price }: Props) => {
   const session = useSession()
   //@ts-ignore
 const userId = session?.data?.user?.id
+if (!userId) return null
   const handleClick = async () => {
     const response = await fetch('/api/cart', {
       method: 'POST',

@@ -5,7 +5,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare, genSalt, hashSync } from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
-import { redirect } from 'next/navigation';
 
 export const authOptions: NextAuthOptions = {
   providers: [

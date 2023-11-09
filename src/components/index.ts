@@ -11,5 +11,5 @@ export {
     MySlider,
     Footer,
     SellerDashboard,
-    ProductRow
+    ProductRow,
 }

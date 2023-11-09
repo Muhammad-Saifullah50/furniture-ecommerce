@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/authOptions'
-import { fetchProductsByUserId } from '@/lib/products'
+import { fetchProductsByUserId } from '@/lib/products.actions'
 import { getServerSession } from 'next-auth'
 import React from 'react'
 import { ProductRow } from '.'

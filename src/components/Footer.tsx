@@ -7,7 +7,7 @@ const Footer = () => {
             <div className='flex flex-wrap p-10 w-full border-t-[1px] border-gray-200 mt-5'>
 
                 <div className='w-2/5 flex flex-col gap-6'>
-                    <div className='text-black font-bold text-2xl'>Furniro.</div>
+                    <div className='text-black font-bold text-2xl'>Furnitees.</div>
                     <div>
                         <p className='text-quadruple-gray'>400 University Drive Suite 200 Coral Gables, FL 33134 USA</p>
                     </div>
