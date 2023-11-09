@@ -1,7 +1,7 @@
 import { SellerDashboard } from '@/components'
 import { Button } from '@/components/ui/button'
 import { authOptions } from '@/lib/authOptions'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import Link from 'next/link'
 import React from 'react'
 

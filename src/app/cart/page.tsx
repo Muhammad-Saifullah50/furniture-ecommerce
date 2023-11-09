@@ -1,6 +1,6 @@
 import { authOptions } from "@/lib/authOptions"
 import { getUserCartItems } from "@/lib/products.actions"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 
 const CartPage = async () => {
 

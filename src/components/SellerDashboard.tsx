@@ -1,6 +1,5 @@
-import { authOptions } from '@/lib/authOptions'
 import { fetchProductsByUserId } from '@/lib/products.actions'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import React from 'react'
 import { ProductRow } from '.'
 
@@ -15,7 +14,7 @@ export interface Product {
     image: string
 }
 const SellerDashboard = async () => {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession()
     //@ts-ignore
     const userProducts = await fetchProductsByUserId(session?.user?.id)
     // console.log(userProducts, 'userProducts')

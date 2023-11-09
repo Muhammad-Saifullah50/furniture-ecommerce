@@ -1,7 +1,9 @@
 import { Footer, Navbar } from '@/components'
 import './globals.css'
 import Provider from '@/providers/SessionProvider'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
+import { Toaster } from "@/components/ui/toaster"
+
 
 import type { Metadata } from 'next'
 import { authOptions } from '@/lib/authOptions'
@@ -26,6 +28,7 @@ export default async function RootLayout({
           <section className='px-5'>
             {children}
           </section>
+          <Toaster />
           <Footer />
         </Provider>
 

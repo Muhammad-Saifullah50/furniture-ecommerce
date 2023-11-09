@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { v2 as cloudinary } from "cloudinary";
 import { ProductSchema } from "@/validations/ProductSchema";
 import { ZodError } from "zod";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 
 

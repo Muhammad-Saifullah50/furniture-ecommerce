@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/use-toast"
 import { Label } from "@radix-ui/react-label"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
@@ -10,8 +11,8 @@ import { RotatingLines } from "react-loader-spinner"
 const SellPage = () => {
 
     const session = useSession()
-    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const {toast} = useToast()
 
     const router = useRouter()
 
@@ -46,10 +47,18 @@ const SellPage = () => {
             console.log(result, 'result')
 
             if (result.status === 400 || result.status === 500) {
-                setError(result.message)
-            } else {
+                toast({
+                  title: 'Operation failed',
+                  description: result.message,
+                  variant: 'destructive',
+                })
+              } else {
+                toast({
+                  title: 'Success',
+                  description: result.message,
+                })
                 router.push('/')
-            }
+              }
 
         } catch (error: any) {
             throw new Error(`error posting product ${error?.message}`)
@@ -80,12 +89,7 @@ const SellPage = () => {
             <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Hello <span className="text-black capitalize">{session?.data?.user?.name}</span>, what are you going to sell today??</h2>
             <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
 
-                {error && (
-                    <div className='bg-red-100 py-2 text-sm flex flex-col justify-center items-center  border-red-600 border-2'>
-                        <h6>Operation Failed</h6>
-                        <p className='text-red-600'>{error}</p>
-                    </div>
-                )}
+                
                 <div>
                     <Label >Product Image</Label>
                     <Input

@@ -19,14 +19,14 @@ const Cart = () => {
             setCartItems(cartItems)
         }
         getData()
-    }, [cartItems.length])
+    }, [cartItems])
 
     const totalPrice = cartItems.reduce((total, item) => {
         //@ts-ignore
         return total + parseFloat(item.price) * item.quantity
     }, 0)
 
-    
+
     return (
         <div>
             <Sheet>
@@ -37,19 +37,21 @@ const Cart = () => {
                         alt='icon'
                         width={27}
 
-                    /></SheetTrigger>
+                    />
+                    <div className='bg-red-700 absolute top-3 text-white rounded-full px-1 right-9 text-[10px]'>{cartItems.length}</div>
+                </SheetTrigger>
                 <SheetContent className='px-6'>
                     <SheetHeader>
                         <SheetTitle>Your Shopping Cart</SheetTitle>
                         <SheetDescription>
                             {cartItems.map((item: any) => (
                                 <CartItem
-                                name={item.name}
-                                price={item.price}
-                                image={item.image}
-                                quantity={item.quantity}
-                                key={item.id}
-                                itemId={item.id}
+                                    name={item.name}
+                                    price={item.price}
+                                    image={item.image}
+                                    quantity={item.quantity}
+                                    key={item.id}
+                                    itemId={item.id}
                                 />
                             ))}
 

@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { Button } from './ui/button'
 import { useSession } from 'next-auth/react'
+import { useToast } from "@/components/ui/use-toast"
+
 
 interface Props {
   name: string
@@ -9,8 +11,11 @@ interface Props {
   price: string
 }
 const AddToCart = ({ name, image, price }: Props) => {
+
+  const { toast } = useToast()
   const [quantity, setQuantity] = useState(1)
   const session = useSession()
+
   //@ts-ignore
 const userId = session?.data?.user?.id
 if (!userId) return null
@@ -28,6 +33,21 @@ if (!userId) return null
         quantity
       }),
     })
+
+    const result = await response.json()
+
+    if (result.status === 400 || result.status === 500) {
+      toast({
+        title: 'Operation failed',
+        description: result.message,
+        variant: 'destructive',
+      })
+    } else {
+      toast({
+        title: 'Success',
+        description: result.message,
+      })
+    }
   }
   return (
     <div className='flex justify-between'>

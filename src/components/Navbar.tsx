@@ -5,8 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from './ui/button'
-
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import Cart from './Cart'
 
 
@@ -80,27 +78,7 @@ const Navbar = () => {
                     width={25}
                 />
 
-<Cart/>
-                {/* <Sheet>
-                    <SheetTrigger>
-                        <Image
-                            src="/cart.svg"
-                            height={27}
-                            alt='icon'
-                            width={27}
-
-                        /></SheetTrigger>
-                    <SheetContent>
-                        <SheetHeader>
-                            <SheetTitle>Your Cart</SheetTitle>
-                            <SheetDescription>
-                                {cartItems.map((item: any) => (
-                                    <p>{item.name}</p>
-                                ))}
-                            </SheetDescription>
-                        </SheetHeader>
-                    </SheetContent>
-                </Sheet> */}
+                <Cart />
 
             </div>
         </nav>
