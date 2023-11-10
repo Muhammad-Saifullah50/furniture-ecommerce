@@ -78,7 +78,7 @@ const Navbar = () => {
                     width={25}
                 />
 
-                {/* <Cart /> */}
+                <Cart />
 
             </div>
         </nav>

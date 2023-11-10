@@ -16,30 +16,30 @@ interface CartItems {
 }
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState<CartItems[]>([])
-    const session = useSession()
+    // const [cartItems, setCartItems] = useState<CartItems[]>([])
+    // const session = useSession()
 
 
-    useEffect(() => {
-        const getData = async () => {
-            //@ts-ignore
-            const cartItems = await getUserCartItems(session?.data?.user?.id)
-            setCartItems(cartItems)
-        }
-        getData()
-        //@ts-ignore
-    }, [cartItems, session?.data?.user?.id])
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         //@ts-ignore
+    //         const cartItems = await getUserCartItems(session?.data?.user?.id)
+    //         setCartItems(cartItems)
+    //     }
+    //     getData()
+    //     //@ts-ignore
+    // }, [cartItems, session?.data?.user?.id])
 
 
 
 
-    const totalPrice = cartItems.reduce((total, item) => {
-        //@ts-ignore
-        return total + parseFloat(item.price) * item.quantity
-    }, 0)
+    // const totalPrice = cartItems.reduce((total, item) => {
+    //     //@ts-ignore
+    //     return total + parseFloat(item.price) * item.quantity
+    // }, 0)
     return (
         <div>
-            <Sheet>
+            {/* <Sheet>
                 <SheetTrigger>
                     <Image
                         src="/cart.svg"
@@ -72,7 +72,7 @@ const Cart = () => {
 
                     </SheetFooter>
                 </SheetContent>
-            </Sheet>
+            </Sheet> */}
 
         </div >
     )
