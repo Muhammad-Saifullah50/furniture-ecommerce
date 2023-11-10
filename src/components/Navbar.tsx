@@ -1,11 +1,10 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from './ui/button'
-// import Cart from './Cart'
+import Cart from './Cart'
 
 
 const Navbar = () => {
@@ -78,7 +77,7 @@ const Navbar = () => {
                     width={25}
                 />
 
-                {/* <Cart /> */}
+                <Cart />
 
             </div>
         </nav>
