@@ -12,98 +12,98 @@ import { redirect, useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 
 const EditProductPage = ({ params }: { params: { id: string } }) => {
-    // const { toast } = useToast();
-    // const router = useRouter();
-    // const { data: session } = useSession();
-    // const [loading, setLoading] = useState(false);
-    // const [form, setForm] = useState({
-    //     name: "",
-    //     desc: "",
-    //     shortDesc: "",
-    //     price: "",
-    //     image: "",
-    // });
+    const { toast } = useToast();
+    const router = useRouter();
+    const { data: session } = useSession();
+    const [loading, setLoading] = useState(false);
+    const [form, setForm] = useState({
+        name: "",
+        desc: "",
+        shortDesc: "",
+        price: "",
+        image: "",
+    });
 
-    // useEffect(() => {
-    //     if (!session) {
-    //         redirect('signin')
-    //     };
-    //     const fetchData = async () => {
-    //         const id = params.id;
-    //         const existingData = await fetchProductById(id);
-    //         setForm({
-    //             name: existingData.product.name,
-    //             desc: existingData.product.desc,
-    //             shortDesc: existingData.product.shortDesc,
-    //             price: existingData.product.price,
-    //             image: existingData.product.image,
-    //         });
-    //     };
-    //     fetchData();
-    // }, [session, params.id]);
-    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault()
-    //     try {
-    //         setLoading(true)
-    //         const productData = {
-    //             id: params.id,
-    //             name: form.name,
-    //             desc: form.desc,
-    //             shortDesc: form.shortDesc,
-    //             price: form.price,
-    //             imgPath: form.image
-    //         }
+    useEffect(() => {
+        if (!session) {
+            redirect('signin')
+        };
+        const fetchData = async () => {
+            const id = params.id;
+            const existingData = await fetchProductById(id);
+            setForm({
+                name: existingData.product.name,
+                desc: existingData.product.desc,
+                shortDesc: existingData.product.shortDesc,
+                price: existingData.product.price,
+                image: existingData.product.image,
+            });
+        };
+        fetchData();
+    }, [session, params.id]);
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try {
+            setLoading(true)
+            const productData = {
+                id: params.id,
+                name: form.name,
+                desc: form.desc,
+                shortDesc: form.shortDesc,
+                price: form.price,
+                imgPath: form.image
+            }
 
-    //         const response = await fetch('/api/products', {
-    //             method: 'PATCH',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(productData)
-    //         })
-
-
-    //         const result = await response.json()
-
-    //         if (result.status === 400 || result.status === 500) {
-    //             toast({
-    //                 title: 'Operation failed',
-    //                 description: result.message,
-    //                 variant: 'destructive',
-    //             })
-    //         } else {
-    //             toast({
-    //                 title: 'Success',
-    //                 description: result.message,
-    //             })
-    //             router.push('/')
-    //         }
-    //     } catch (error: any) {
-    //         throw new Error(`error posting product ${error?.message}`)
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // }
+            const response = await fetch('/api/products', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productData)
+            })
 
 
-    // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     e.preventDefault()
-    //     const file = e.target.files?.[0];
-    //     if (!file) return;
-    //     if (!file.type.includes('image')) return alert('Please upload an image file');
+            const result = await response.json()
 
-    //     const reader = new FileReader();
+            if (result.status === 400 || result.status === 500) {
+                toast({
+                    title: 'Operation failed',
+                    description: result.message,
+                    variant: 'destructive',
+                })
+            } else {
+                toast({
+                    title: 'Success',
+                    description: result.message,
+                })
+                router.push('/')
+            }
+        } catch (error: any) {
+            throw new Error(`error posting product ${error?.message}`)
+        } finally {
+            setLoading(false)
+        }
+    }
 
-    //     reader.readAsDataURL(file);
 
-    //     reader.onload = () => {
-    //         const imageDataUrl = reader.result
-    //         setForm({ ...form, image: imageDataUrl as string })
-    //     }
-    // }
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (!file.type.includes('image')) return alert('Please upload an image file');
+
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+            const imageDataUrl = reader.result
+            setForm({ ...form, image: imageDataUrl as string })
+        }
+    }
     return (
         <section className="flex justify-center items-center flex-col mt-10 gap-5">
-            {/* <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Edit Product</h2>
+            <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Edit Product</h2>
             <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
 
 
@@ -157,7 +157,7 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
                     visible={true}
                 />)}</Button>
 
-            </form> */}
+            </form>
         </section>
     )
 }
