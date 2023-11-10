@@ -13,14 +13,11 @@ import { useToast } from '@/components/ui/use-toast'
 
 
 const SigninPage = () => {
-
   const { toast } = useToast()
   const username = useRef('')
   const email = useRef('')
   const password = useRef('')
-
   const router = useRouter()
-
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
