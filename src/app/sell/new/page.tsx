@@ -10,83 +10,83 @@ import { useState, useRef, ChangeEvent } from "react"
 import { RotatingLines } from "react-loader-spinner"
 const SellPage = () => {
 
-    // const session = useSession()
-    // const [loading, setLoading] = useState(false)
-    // const {toast} = useToast()
+    const session = useSession()
+    const [loading, setLoading] = useState(false)
+    const {toast} = useToast()
 
-    // const router = useRouter()
+    const router = useRouter()
 
-    // const image = useRef('')
-    // const productName = useRef('')
-    // const shrtDesc = useRef('')
-    // const desc = useRef('')
-    // const price = useRef('')
+    const image = useRef('')
+    const productName = useRef('')
+    const shrtDesc = useRef('')
+    const desc = useRef('')
+    const price = useRef('')
 
-    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault()
-    //     try {
-    //         setLoading(true)
-    //         const productData = {
-    //             name: productName.current,
-    //             desc: desc.current,
-    //             shortDesc: shrtDesc.current,
-    //             price: price.current,
-    //             imgPath: image.current
-    //         }
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try {
+            setLoading(true)
+            const productData = {
+                name: productName.current,
+                desc: desc.current,
+                shortDesc: shrtDesc.current,
+                price: price.current,
+                imgPath: image.current
+            }
 
-    //         const response = await fetch('/api/products', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(productData)
-    //         })
+            const response = await fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productData)
+            })
 
             
-    //         const result = await response.json()
-    //         console.log(result, 'result')
+            const result = await response.json()
+            console.log(result, 'result')
 
-    //         if (result.status === 400 || result.status === 500) {
-    //             toast({
-    //               title: 'Operation failed',
-    //               description: result.message,
-    //               variant: 'destructive',
-    //             })
-    //           } else {
-    //             toast({
-    //               title: 'Success',
-    //               description: result.message,
-    //             })
-    //             router.push('/')
-    //           }
+            if (result.status === 400 || result.status === 500) {
+                toast({
+                  title: 'Operation failed',
+                  description: result.message,
+                  variant: 'destructive',
+                })
+              } else {
+                toast({
+                  title: 'Success',
+                  description: result.message,
+                })
+                router.push('/')
+              }
 
-    //     } catch (error: any) {
-    //         throw new Error(`error posting product ${error?.message}`)
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // }
+        } catch (error: any) {
+            throw new Error(`error posting product ${error?.message}`)
+        } finally {
+            setLoading(false)
+        }
+    }
 
-    // const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = e.target.files?.[0];
-    //     if (!file) return;
-    //     if (!file.type.includes('image')) return alert('Please upload an image file');
+    const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (!file.type.includes('image')) return alert('Please upload an image file');
 
-    //     const reader = new FileReader();
+        const reader = new FileReader();
 
-    //     reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
 
-    //     reader.onload = () => {
-    //         const result = reader.result;
+        reader.onload = () => {
+            const result = reader.result;
 
-    //         if (typeof result === 'string') {
-    //             image.current = result;
-    //         }
-    //     };
-    // };
+            if (typeof result === 'string') {
+                image.current = result;
+            }
+        };
+    };
     return (
         <section className="flex justify-center items-center flex-col mt-10 gap-5">
-            {/* <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Hello <span className="text-black capitalize">{session?.data?.user?.name}</span>, what are you going to sell today??</h2>
+            <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Hello <span className="text-black capitalize">{session?.data?.user?.name}</span>, what are you going to sell today??</h2>
             <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
 
                 
@@ -132,7 +132,7 @@ const SellPage = () => {
                     visible={true}
                 />)}</Button>
 
-            </form> */}
+            </form>
         </section>
     )
 }
