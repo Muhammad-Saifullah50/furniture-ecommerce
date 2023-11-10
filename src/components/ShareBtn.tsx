@@ -7,20 +7,20 @@ import { Button } from './ui/button'
 
 const ShareBtn = ({productId}: {productId: string}) => {
 
-    // const [copied, setCopied] = useState(false)
-    // const LinktoCopy = `https://furnitees.vercel.app/shop/${productId}`
-    // const handleCopy = () => {
-    //     setCopied(true)
-    //     navigator.clipboard.writeText(LinktoCopy)
+    const [copied, setCopied] = useState(false)
+    const LinktoCopy = `https://furnitees.vercel.app/shop/${productId}`
+    const handleCopy = () => {
+        setCopied(true)
+        navigator.clipboard.writeText(LinktoCopy)
 
-    //     setTimeout(() => {
-    //         setCopied(false)
-    //     }, 10000)
-    // }
+        setTimeout(() => {
+            setCopied(false)
+        }, 10000)
+    }
     return (
 
         <Dialog>
-            {/* <DialogTrigger>
+            <DialogTrigger>
                 <Image
                     src='/share.svg'
                     alt="share"
@@ -59,7 +59,7 @@ const ShareBtn = ({productId}: {productId: string}) => {
                         <Button className='bg-gold-primary hover:bg-gold-secondary font-medium'>Done</Button>
                     </DialogClose>
                 </DialogFooter>
-            </DialogContent> */}
+            </DialogContent>
         </Dialog>
 
     )
