@@ -13,21 +13,21 @@ interface Props {
     quantity: string
 }
 const CartItem = ({ itemId, name, image, price, quantity }: Props) => {
-    // const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-    // const handleDelete = async (id: string) => {
-    //     try {
-    //         setLoading(true)
-    //         await deleteCartItem(id)
-    //     } catch (error) {
-    //         throw new Error('Error deleting product')
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // }
+    const handleDelete = async (id: string) => {
+        try {
+            setLoading(true)
+            await deleteCartItem(id)
+        } catch (error) {
+            throw new Error('Error deleting product')
+        } finally {
+            setLoading(false)
+        }
+    }
     return (
         <article className=' py-4 flex items-center justify-between' >
-            {/* <div>
+            <div>
                 <Image src={image} alt={name} width={50} height={50} className='rounded-lg object-fill w-14 h-14' />
             </div>
             <div className='flex flex-col text-base'>
@@ -56,7 +56,7 @@ const CartItem = ({ itemId, name, image, price, quantity }: Props) => {
                     />)}
 
                 </Button>
-            </div> */}
+            </div>
         </article>
     )
 }
