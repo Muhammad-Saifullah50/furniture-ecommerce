@@ -17,27 +17,27 @@ interface CartItems {
 }
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState<CartItems[]>([])
-    const session = useSession()
+    // const [cartItems, setCartItems] = useState<CartItems[]>([])
+    // const session = useSession()
 
 
-    useEffect(() => {
-        const getData = async () => {
-            //@ts-ignore
-            const cartItems = await getUserCartItems(session?.data?.user?.id)
-            setCartItems(cartItems)
-        }
-        getData()
-        //@ts-ignore
-    }, [session?.data?.user?.id])
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         //@ts-ignore
+    //         const cartItems = await getUserCartItems(session?.data?.user?.id)
+    //         setCartItems(cartItems)
+    //     }
+    //     getData()
+    //     //@ts-ignore
+    // }, [session?.data?.user?.id])
 
 
 
 
-    const totalPrice = cartItems.reduce((total, item) => {
-        //@ts-ignore
-        return total + parseFloat(item.price) * item.quantity
-    }, 0)
+    // const totalPrice = cartItems.reduce((total, item) => {
+    //     //@ts-ignore
+    //     return total + parseFloat(item.price) * item.quantity
+    // }, 0)
     return (
         <div>
             <Sheet>
@@ -49,12 +49,12 @@ const Cart = () => {
                         width={27}
 
                     />
-                    <div className='bg-red-700 absolute top-3 text-white rounded-full px-1 right-9 text-[10px]'>{cartItems.length}</div>
+                    {/* <div className='bg-red-700 absolute top-3 text-white rounded-full px-1 right-9 text-[10px]'>{cartItems.length}</div> */}
                 </SheetTrigger>
                 <SheetContent className='px-6'>
                     <SheetHeader>
                         <SheetTitle>Your Shopping Cart</SheetTitle>
-                            {cartItems.map((item: any) => (
+                            {/* {cartItems.map((item: any) => (
                                 <CartItem
                                     name={item.name}
                                     price={item.price}
@@ -63,11 +63,11 @@ const Cart = () => {
                                     key={item.id}
                                     itemId={item.id}
                                 />
-                            ))}
+                            ))} */}
                     </SheetHeader>
                     <SheetFooter >
                         <div className='flex flex-col items-center w-full font-semibold gap-8 mt-8'>
-                            <p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p>
+                            {/* <p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p> */}
                             <Button className='w-full text-base font-semibold'>Checkout</Button>
                         </div>
 
