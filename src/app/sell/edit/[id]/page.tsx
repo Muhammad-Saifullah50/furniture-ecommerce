@@ -23,9 +23,10 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
         price: "",
         image: "",
     });
-    if (!session) return;
 
     useEffect(() => {
+        if (!session) 'Please signin to edit this product';
+
 
         const fetchData = async () => {
             const id = params.id;
