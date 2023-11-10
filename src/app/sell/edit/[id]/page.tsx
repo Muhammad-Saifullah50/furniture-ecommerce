@@ -8,11 +8,11 @@ import { fetchProductById } from "@/lib/products.actions"
 import { useState, useEffect } from "react"
 import { RotatingLines } from "react-loader-spinner"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 
 const EditProductPage = ({ params }: { params: { id: string } }) => {
-   const { toast } = useToast();
+    const { toast } = useToast();
     const router = useRouter();
     const { data: session } = useSession();
     const [loading, setLoading] = useState(false);
@@ -25,7 +25,9 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
     });
 
     useEffect(() => {
-
+        if (!session) {
+            redirect('signin')
+        };
         const fetchData = async () => {
             const id = params.id;
             const existingData = await fetchProductById(id);
@@ -65,17 +67,17 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
 
             if (result.status === 400 || result.status === 500) {
                 toast({
-                  title: 'Operation failed',
-                  description: result.message,
-                  variant: 'destructive',
+                    title: 'Operation failed',
+                    description: result.message,
+                    variant: 'destructive',
                 })
-              } else {
+            } else {
                 toast({
-                  title: 'Success',
-                  description: result.message,
+                    title: 'Success',
+                    description: result.message,
                 })
                 router.push('/')
-              }
+            }
         } catch (error: any) {
             throw new Error(`error posting product ${error?.message}`)
         } finally {
@@ -104,7 +106,7 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
             <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Edit Product</h2>
             <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
 
-               
+
                 <div>
                     <div className="flex justify-center items-center w-full">
                         {form.image && (<Image src={form.image} width={200} height={100} alt="product image" />)}
