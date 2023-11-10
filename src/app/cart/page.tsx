@@ -10,7 +10,7 @@ const CartPage = async () => {
   return (
     <section>
       {cartItems.map((item: any) => (
-        <p>{item.name}</p>
+        <p key={item.name}>{item.name}</p>
       ))
       }
     </section >

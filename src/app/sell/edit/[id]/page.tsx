@@ -13,7 +13,7 @@ import { useToast } from "@/components/ui/use-toast"
 
 const EditProductPage = ({ params }: { params: { id: string } }) => {
     const session = useSession()
-    if (!session) return
+    if (!session) return null
     const { toast } = useToast()
 
     useEffect(() => {
@@ -32,10 +32,9 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
 
         }
         fetchData()
-    }, [])
+    }, [params.id])
 
     const router = useRouter()
-    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [form, setForm] = useState({
         name: '',
@@ -109,12 +108,7 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
             <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center '>Edit Product</h2>
             <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
 
-                {error && (
-                    <div className='bg-red-100 py-2 text-sm flex flex-col justify-center items-center  border-red-600 border-2'>
-                        <h6>Operation Failed</h6>
-                        <p className='text-red-600'>{error}</p>
-                    </div>
-                )}
+               
                 <div>
                     <div className="flex justify-center items-center w-full">
                         {form.image && (<Image src={form.image} width={200} height={100} alt="product image" />)}
