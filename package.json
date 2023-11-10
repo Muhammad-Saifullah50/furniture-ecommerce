@@ -15,6 +15,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.4",
     "@types/node": "20.6.5",
     "@types/react": "18.2.22",
@@ -31,7 +32,6 @@
     "lucide-react": "^0.279.0",
     "next": "^14.0.1",
     "next-auth": "^4.24.4",
-    "node-gyp": "^10.0.1",
     "postcss": "8.4.30",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -45,7 +45,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
     "@types/react-slick": "^0.23.10",
     "prisma": "^5.5.2"
   }

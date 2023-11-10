@@ -149,7 +149,7 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
                 <Button
                     className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base'
                     disabled={loading}
-                >{loading ? 'Updating...' : 'Update'} Product {loading && (<RotatingLines
+                >{loading ? 'Updating' : 'Update'} Product {loading && (<RotatingLines
                     strokeColor="white"
                     strokeWidth="5"
                     animationDuration="1"

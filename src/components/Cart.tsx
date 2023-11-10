@@ -28,7 +28,7 @@ const Cart = () => {
             
         }
         getData()
-    }, [])
+    }, [cartItems])
 
 
     const totalPrice = cartItems.reduce((total, item) => {

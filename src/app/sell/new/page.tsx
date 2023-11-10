@@ -124,7 +124,7 @@ const SellPage = () => {
                 <Button
                     className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base'
                     disabled={loading}
-                >{loading ? 'Posting...' : 'Post'} Product {loading && (<RotatingLines
+                >{loading ? 'Posting' : 'Post'} Product {loading && (<RotatingLines
                     strokeColor="white"
                     strokeWidth="5"
                     animationDuration="1"
