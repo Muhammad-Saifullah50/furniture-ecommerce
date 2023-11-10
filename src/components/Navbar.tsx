@@ -9,16 +9,16 @@ import Cart from './Cart'
 
 
 const Navbar = () => {
-    // const pathname = usePathname();
-    // const session = useSession()
+    const pathname = usePathname();
+    const session = useSession()
 
 
-    // const isActive = (path: string) => {
-    //     return (pathname === path)
-    // }
+    const isActive = (path: string) => {
+        return (pathname === path)
+    }
     return (
         <nav className='flex justify-between px-9 w-full h-full py-3 sticky top-0 left-0 bg-white shadow-gray-200 shadow-lg z-50 items-center'>
-            {/* <div className='flex space-x-2'>
+            <div className='flex space-x-2'>
                 <Image
                     src='/logoicon.png'
                     width={30}
@@ -80,7 +80,7 @@ const Navbar = () => {
 
                 <Cart />
 
-            </div> */}
+            </div>
         </nav>
     )
 }
