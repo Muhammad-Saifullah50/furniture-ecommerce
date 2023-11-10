@@ -5,13 +5,14 @@ import { db } from "./prisma"
 import { notFound } from "next/navigation"
 
 
-export const fetchProducts = async (pageNumber = 1, pageSize = 10) => {
+export const fetchProducts = async (path: string, pageNumber = 1, pageSize = 10) => {
     try {
         const params = new URLSearchParams({
             pageNumber: pageNumber.toString(),
             pageSize: pageSize.toString()
         })
         const products = await fetch(`http://localhost:3000/api/products?${params.toString()}`)
+        revalidatePath(path)
         return products
     } catch (error: any) {
         if (error) notFound()
@@ -63,7 +64,7 @@ export const getUserCartItems = async (userId: string) => {
                 usersId: userId
             }
         })
-        // console.log(cartItems, 'cartItems')
+        revalidatePath('/shop')
         return cartItems
     } catch (error: any) {
         if (error) notFound()
@@ -74,8 +75,8 @@ export const getUserCartItems = async (userId: string) => {
 export const deleteCartItem = async (id: string) => {
     try {
         const itemToDelete = await db.cart.delete({ where: { id: id } })
-    } catch (error:any) {
+    } catch (error: any) {
         throw new Error(`Error deleting product ${error?.message}`)
     }
-   
+
 } 

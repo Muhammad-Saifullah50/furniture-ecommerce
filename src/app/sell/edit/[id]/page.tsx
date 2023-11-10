@@ -9,10 +9,12 @@ import { useState, useEffect } from "react"
 import { RotatingLines } from "react-loader-spinner"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { useToast } from "@/components/ui/use-toast"
 
 const EditProductPage = ({ params }: { params: { id: string } }) => {
     const session = useSession()
     if (!session) return
+    const { toast } = useToast()
 
     useEffect(() => {
         const id = params.id
@@ -65,14 +67,20 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
 
 
             const result = await response.json()
-            console.log(result, 'result')
 
             if (result.status === 400 || result.status === 500) {
-                setError(result.message)
-            } else {
+                toast({
+                  title: 'Operation failed',
+                  description: result.message,
+                  variant: 'destructive',
+                })
+              } else {
+                toast({
+                  title: 'Success',
+                  description: result.message,
+                })
                 router.push('/')
-            }
-
+              }
         } catch (error: any) {
             throw new Error(`error posting product ${error?.message}`)
         } finally {
@@ -149,7 +157,7 @@ const EditProductPage = ({ params }: { params: { id: string } }) => {
                 <Button
                     className='bg-gold-primary hover:bg-gold-secondary flex gap-2 text-base'
                     disabled={loading}
-                >Edit Product {loading && (<RotatingLines
+                >{loading ? 'Updating...' : 'Update'} Product {loading && (<RotatingLines
                     strokeColor="white"
                     strokeWidth="5"
                     animationDuration="1"

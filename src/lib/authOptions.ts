@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare, genSalt, hashSync } from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
+import { redirect } from 'next/navigation';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -36,7 +37,7 @@ export const authOptions: NextAuthOptions = {
             } else {
               throw new Error('Wrong credentials!')
             }
-          }
+          } 
 
           const newUser = await db.users.create({
             data: {
@@ -47,7 +48,6 @@ export const authOptions: NextAuthOptions = {
             }
           })
           console.log(newUser, 'newUser')
-
           return newUser
 
         } catch (error: any) {

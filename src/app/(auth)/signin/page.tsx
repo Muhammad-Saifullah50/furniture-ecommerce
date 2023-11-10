@@ -8,13 +8,13 @@ import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import { ZodError } from 'zod'
 import { RotatingLines } from 'react-loader-spinner'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { useToast } from '@/components/ui/use-toast'
 
 
 const SigninPage = () => {
-  const { data: session } = useSession();
-  // console.log(session, 'session')
 
+  const { toast } = useToast()
   const username = useRef('')
   const email = useRef('')
   const password = useRef('')
@@ -44,11 +44,20 @@ const SigninPage = () => {
       })
 
       console.log(result)
-      if (result?.error) {
-        setError(result.error)
+      if (result && result.status === 400 || result && result.status === 500) {
+        toast({
+          title: 'Operation failed',
+          description: 'Something went wrong',
+          variant: 'destructive',
+        })
       } else {
+        toast({
+          title: 'Success',
+          description: 'Signed in successfully',
+        })
         router.push('/sell')
       }
+
     } catch (error) {
       if (error instanceof ZodError) {
         const errmsg = error.flatten().fieldErrors;

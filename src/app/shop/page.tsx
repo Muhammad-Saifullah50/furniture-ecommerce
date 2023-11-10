@@ -2,7 +2,6 @@ import { ProductCard } from '@/components'
 import { Button } from '@/components/ui/button'
 import { fetchProducts } from '@/lib/products.actions'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 export interface Product {
@@ -16,8 +15,8 @@ export interface Product {
   image: string
 }
 const ShopPage = async () => {
-
-  const response = await fetchProducts()
+  
+  const response = await fetchProducts('/shop')
   const products = await response.json()
   // console.log(products)
   return (
@@ -37,6 +36,7 @@ const ShopPage = async () => {
       <div className='bar h-24 bg-[#F9F1E7]'>
         pagination
       </div>
+
 
       <section className='mt-10'>
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-x-6 gap-y-28 my-10 '>

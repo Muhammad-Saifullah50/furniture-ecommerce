@@ -17,7 +17,7 @@ const Navbar = () => {
         return (pathname === path)
     }
     return (
-        <nav className='flex justify-between px-9 w-full h-full py-3 items-center'>
+        <nav className='flex justify-between px-9 w-full h-full py-3 sticky top-0 left-0 bg-white shadow-black shadow-lg z-50 items-center'>
             <div className='flex space-x-2'>
                 <Image
                     src='/logoicon.png'

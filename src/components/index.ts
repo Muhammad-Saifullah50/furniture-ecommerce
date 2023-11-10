@@ -13,5 +13,5 @@ export {
     Footer,
     SellerDashboard,
     ProductRow,
-    CartItem
+    CartItem,
 }

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default async function Home() {
   
-  const response = await fetchProducts()
+  const response = await fetchProducts('/')
   const products = await response.json()
   // console.log(products, 'products')
   return (<>

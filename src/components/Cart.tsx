@@ -6,11 +6,20 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Button } from './ui/button'
 import { CartItem } from '.'
+import { usePathname } from 'next/navigation'
 
+interface CartItems {
+    id: string
+    name: string
+    image: string
+    price: string
+    quantity: string
+}
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState<CartItems[]>([])
     const session = useSession()
+
 
     useEffect(() => {
         const getData = async () => {
@@ -19,14 +28,16 @@ const Cart = () => {
             setCartItems(cartItems)
         }
         getData()
-    }, [cartItems])
+        //@ts-ignore
+    }, [cartItems, session?.data?.user?.id])
+
+
+
 
     const totalPrice = cartItems.reduce((total, item) => {
         //@ts-ignore
         return total + parseFloat(item.price) * item.quantity
     }, 0)
-
-
     return (
         <div>
             <Sheet>
@@ -43,7 +54,6 @@ const Cart = () => {
                 <SheetContent className='px-6'>
                     <SheetHeader>
                         <SheetTitle>Your Shopping Cart</SheetTitle>
-                        <SheetDescription>
                             {cartItems.map((item: any) => (
                                 <CartItem
                                     name={item.name}
@@ -54,8 +64,6 @@ const Cart = () => {
                                     itemId={item.id}
                                 />
                             ))}
-
-                        </SheetDescription>
                     </SheetHeader>
                     <SheetFooter >
                         <div className='flex flex-col items-center w-full font-semibold gap-8 mt-8'>
@@ -67,7 +75,7 @@ const Cart = () => {
                 </SheetContent>
             </Sheet>
 
-        </div>
+        </div >
     )
 }
 
