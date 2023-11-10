@@ -32,8 +32,7 @@ export const fetchProductsByUserId = async (id: string) => {
         // console.log(userProducts)
         return userProducts
     } catch (error: any) {
-        // if (error) notFound()
-        throw new Error(`Error fetching product ${error?.message}`)
+        notFound()
     }
 }
 export const fetchProductById = async (id: string) => {
@@ -43,8 +42,8 @@ export const fetchProductById = async (id: string) => {
         const productAuthor = await db.users.findUnique({ where: { id: product?.usersId } })
         return { product, productAuthor }
     } catch (error: any) {
-        // if (error) notFound()
-        throw new Error(`Error fetching product ${error?.message}`)
+        notFound()
+
     }
 }
 
