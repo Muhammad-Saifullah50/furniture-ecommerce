@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Button } from './ui/button'
 import { CartItem } from '.'
-import { usePathname } from 'next/navigation'
 
 interface CartItems {
     id: string
