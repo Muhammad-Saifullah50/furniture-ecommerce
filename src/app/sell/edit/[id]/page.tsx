@@ -12,37 +12,34 @@ import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 
 const EditProductPage = ({ params }: { params: { id: string } }) => {
-    const session = useSession()
-    if (!session) return null
-    const { toast } = useToast()
+   const { toast } = useToast();
+    const router = useRouter();
+    const { data: session } = useSession();
+    const [loading, setLoading] = useState(false);
+    const [form, setForm] = useState({
+        name: "",
+        desc: "",
+        shortDesc: "",
+        price: "",
+        image: "",
+    });
+    if (!session) return;
 
     useEffect(() => {
-        const id = params.id
 
         const fetchData = async () => {
-            const existingData = await fetchProductById(id)
-
+            const id = params.id;
+            const existingData = await fetchProductById(id);
             setForm({
                 name: existingData.product.name,
                 desc: existingData.product.desc,
                 shortDesc: existingData.product.shortDesc,
                 price: existingData.product.price,
-                image: existingData.product.image
-            })
-
-        }
-        fetchData()
-    }, [params.id])
-
-    const router = useRouter()
-    const [loading, setLoading] = useState(false)
-    const [form, setForm] = useState({
-        name: '',
-        desc: '',
-        shortDesc: '',
-        price: '',
-        image: ''
-    })
+                image: existingData.product.image,
+            });
+        };
+        fetchData();
+    }, [session, params.id]);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
