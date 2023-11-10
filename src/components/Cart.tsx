@@ -17,18 +17,24 @@ interface CartItems {
 }
 
 const Cart = () => {
+
     const session = useSession()
     const [cartItems, setCartItems] = useState<CartItems[]>([])
 
+
     useEffect(() => {
         const getData = async () => {
-            //@ts-ignore
-            const items = await getUserCartItems(session.data?.user?.id)
-            setCartItems(items)
-            
+            if (session.data?.user) {
+                //@ts-ignore
+                const items = await getUserCartItems(session.data.user.id);
+                setCartItems(items);
+            }
+        };
+
+        if (session.data) {
+            getData();
         }
-        getData()
-    }, [cartItems])
+    }, [session]);
 
 
     const totalPrice = cartItems.reduce((total, item) => {
