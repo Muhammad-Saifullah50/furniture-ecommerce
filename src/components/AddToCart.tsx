@@ -13,56 +13,56 @@ interface Props {
 }
 const AddToCart = ({ name, image, price }: Props) => {
 
-  const { toast } = useToast()
-  const [quantity, setQuantity] = useState(1)
-  const session = useSession()
-  const [loading, setLoading] = useState(false)
+  // const { toast } = useToast()
+  // const [quantity, setQuantity] = useState(1)
+  // const session = useSession()
+  // const [loading, setLoading] = useState(false)
 
-  //@ts-ignore
-  const userId = session?.data?.user?.id
-  if (!userId) return 'Please sign to purchase'
-  const handleClick = async () => {
+  // //@ts-ignore
+  // const userId = session?.data?.user?.id
+  // if (!userId) return 'Please sign to purchase'
+  // const handleClick = async () => {
 
-    try {
-      setLoading(true)
-      const response = await fetch('/api/cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          userId,
-          name,
-          image,
-          price,
-          quantity
-        }),
-      })
+  //   try {
+  //     setLoading(true)
+  //     const response = await fetch('/api/cart', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         userId,
+  //         name,
+  //         image,
+  //         price,
+  //         quantity
+  //       }),
+  //     })
 
-      const result = await response.json()
+  //     const result = await response.json()
 
-      if (result.status === 400 || result.status === 500) {
-        toast({
-          title: 'Operation failed',
-          description: result.message,
-          variant: 'destructive',
-        })
-      } else {
-        toast({
-          title: 'Success',
-          description: result.message,
-        })
-      }
-    } catch (error) {
-      throw new Error('Something went wrong')
-    } finally {
-      setLoading(false)
-    }
+  //     if (result.status === 400 || result.status === 500) {
+  //       toast({
+  //         title: 'Operation failed',
+  //         description: result.message,
+  //         variant: 'destructive',
+  //       })
+  //     } else {
+  //       toast({
+  //         title: 'Success',
+  //         description: result.message,
+  //       })
+  //     }
+  //   } catch (error) {
+  //     throw new Error('Something went wrong')
+  //   } finally {
+  //     setLoading(false)
+  //   }
 
-  }
+  // }
   return (
     <div className='flex justify-between'>
-      <div className='flex gap-3 justify-center items-center text-lg'>
+      {/* <div className='flex gap-3 justify-center items-center text-lg'>
         <Button className=' text-lg' onClick={() => setQuantity(quantity - 1)} disabled={quantity === 1}>-</Button>
         <span>{quantity}</span>
         <Button className=' text-lg' onClick={() => setQuantity(quantity + 1)}>+</Button>
@@ -81,7 +81,7 @@ const AddToCart = ({ name, image, price }: Props) => {
           visible={true}
         />)}
 
-      </Button>
+      </Button> */}
     </div>
   )
 }
