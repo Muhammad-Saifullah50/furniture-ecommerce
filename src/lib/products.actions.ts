@@ -11,7 +11,7 @@ export const fetchProducts = async (path: string, pageNumber = 1, pageSize = 10)
             pageNumber: pageNumber.toString(),
             pageSize: pageSize.toString()
         })
-        const products = await fetch(`http://localhost:3000/api/products?${params.toString()}`)
+        const products = await fetch(`http://localhost:3000/api/products`)
         revalidatePath(path)
         return products
     } catch (error: any) {
