@@ -7,8 +7,33 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 
 
-export const GET = async () => {
+export const GET = async (request: NextRequest) => {
     try {
+        const url = new URL(request.url)
+        const query = url.searchParams.get('query')
+
+        if (query) {
+            const queryProducts = await db.products.findMany({
+                where: {
+                    OR: [
+                        {
+                            name: { contains: query }
+                        },
+                        {
+                            desc: { contains: query }
+                        },
+                        {
+                            shortDesc: { contains: query }
+                        }
+                    ]
+                }
+            })
+            return NextResponse.json(
+                { message: "Data retrieved successfully", data: queryProducts },
+                { status: 200 }
+            );
+        }
+        
         const products = await db.products.findMany({
             orderBy: [{ createdAt: "desc" }]
         })

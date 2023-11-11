@@ -1,4 +1,5 @@
 import { ProductCard } from '@/components'
+import Search from '@/components/Search'
 import { Button } from '@/components/ui/button'
 import { fetchProducts } from '@/lib/products.actions'
 import Image from 'next/image'
@@ -14,9 +15,16 @@ export interface Product {
   price: string
   image: string
 }
-const ShopPage = async () => {
-  
-  const response = await fetchProducts('/shop')
+const ShopPage = async ({ searchParams }: { searchParams: { query: string } }) => {
+
+
+  const response = await fetchProducts({
+    path: 'shop',
+    pageNumber: 1,
+    pageSize: 10,
+    searchString: searchParams.query || ''
+  })
+
   const products = await response.json()
   // console.log(products)
   return (
@@ -33,23 +41,23 @@ const ShopPage = async () => {
         </div>
       </div>
 
-      <div className='bar h-24 bg-[#F9F1E7]'>
-        pagination
+      <div className='h-24 bg-[#F9F1E7] flex justify-center items-center'>
+        <Search />
       </div>
 
 
       <section className='mt-10'>
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-x-6 gap-y-28 my-10 '>
           {products?.data?.map((product: Product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id} 
-                title={product.name}
-                shrtdesc={product.shortDesc}
-                price={product.price}
-                image={product.image}
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.name}
+              shrtdesc={product.shortDesc}
+              price={product.price}
+              image={product.image}
 
-              />
+            />
           ))}
         </div>
 

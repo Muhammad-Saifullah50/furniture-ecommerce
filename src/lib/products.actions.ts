@@ -6,10 +6,20 @@ import { notFound } from "next/navigation"
 import { serverUrl } from "./serverUrl"
 
 
-export const fetchProducts = async (path: string) => {
+export const fetchProducts = async ({
+    path,
+    pageNumber,
+    pageSize,
+    searchString
+}: {
+    path: string,
+    pageNumber: number,
+    pageSize: number,
+    searchString?: string
+}
+) => {
     try {
-
-        const products = await fetch(`${serverUrl}/api/products`)
+        const products = await fetch(`${serverUrl}/api/products?query=${searchString}`)
         revalidatePath(path)
         return products
     } catch (error: any) {
