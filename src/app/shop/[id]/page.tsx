@@ -1,5 +1,6 @@
 import AddToCart from '@/components/AddToCart'
 import { fetchProductById } from '@/lib/products.actions'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import React from 'react'
 
@@ -7,6 +8,11 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
     if (!params?.id) return
 
     const { product, productAuthor } = await fetchProductById(params?.id)
+
+    const metadata: Metadata = {
+        title: product?.name,
+        description: product?.shortDesc
+    }
     return (<>
         <section className='flex max-md:flex-col md:flex-row p-20 space-x-20 justify-between'>
             <div className='left w-full  md:w-1/2 '>

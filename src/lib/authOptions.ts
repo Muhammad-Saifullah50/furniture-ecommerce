@@ -2,10 +2,9 @@ import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { db } from '@/lib/prisma';
 import CredentialsProvider from "next-auth/providers/credentials";
-import { compare, genSalt, hashSync } from 'bcrypt';
+import { compare, genSalt, hashSync } from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
-import { redirect } from 'next/navigation';
 
 export const authOptions: NextAuthOptions = {
   providers: [

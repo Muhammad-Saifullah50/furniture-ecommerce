@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from './ui/button'
 import { RotatingLines } from 'react-loader-spinner'
 import { deleteCartItem } from '@/lib/products.actions'
+import { useToast } from './ui/use-toast'
 
 interface Props {
     itemId: string
@@ -11,9 +12,11 @@ interface Props {
     image: string
     price: string
     quantity: string
+    styles?: string
 }
-const CartItem = ({ itemId, name, image, price, quantity }: Props) => {
+const CartItem = ({ itemId, name, image, price, quantity, styles }: Props) => {
     const [loading, setLoading] = useState(false)
+
 
     const handleDelete = async (id: string) => {
         try {
@@ -26,7 +29,7 @@ const CartItem = ({ itemId, name, image, price, quantity }: Props) => {
         }
     }
     return (
-        <article className=' py-4 flex items-center justify-between' >
+        <article className={`py-4 flex items-center ${styles}`} >
             <div>
                 <Image src={image} alt={name} width={50} height={50} className='rounded-lg object-fill w-14 h-14' />
             </div>

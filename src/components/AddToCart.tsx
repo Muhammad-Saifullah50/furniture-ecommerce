@@ -40,6 +40,7 @@ const AddToCart = ({ name, image, price }: Props) => {
       })
 
       const result = await response.json()
+      console.log(result)
 
       if (result.status === 400 || result.status === 500) {
         toast({

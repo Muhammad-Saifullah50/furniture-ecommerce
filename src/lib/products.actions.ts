@@ -56,21 +56,6 @@ export const DeleteProduct = async (id: string, path: string) => {
     }
 }
 
-export const getUserCartItems = async (userId: string) => {
-    try {
-        const cartItems = await db.cart.findMany({
-            where: {
-                usersId: userId
-            }
-        })
-        revalidatePath('/shop')
-        return cartItems
-    } catch (error: any) {
-        if (error) notFound()
-        throw new Error(`Error fetching cart items ${error?.message}`)
-    }
-}
-
 export const deleteCartItem = async (id: string) => {
     try {
         const itemToDelete = await db.cart.delete({ where: { id: id } })

@@ -15,7 +15,7 @@ export interface Product {
     image: string
 }
 const SellerDashboard = async () => {
-    const session = await getServerSession()
+    const session = await getServerSession(authOptions)
     //@ts-ignore
     const userProducts = await fetchProductsByUserId(session?.user?.id)
     // console.log(userProducts, 'userProducts')
