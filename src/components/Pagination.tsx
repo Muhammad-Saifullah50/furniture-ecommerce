@@ -1,8 +1,11 @@
 'use client'
 
-import React from 'react'
+const Pagination = ({pageNumber, isNext}) => {
 
-const Pagination = () => {
+  const handleNavigation = () => {
+
+  }
+
   return (
     <div>
       
