@@ -5,13 +5,9 @@ import { db } from "./prisma"
 import { notFound } from "next/navigation"
 
 
-export const fetchProducts = async (path: string, pageNumber = 1, pageSize = 10) => {
+export const fetchProducts = async (path: string) => {
     try {
-        const params = new URLSearchParams({
-            pageNumber: pageNumber.toString(),
-            pageSize: pageSize.toString()
-        })
-        const products = await fetch(`http://localhost:3000/api/products`)
+        const products = await fetch(`https://furnitees.vercel.app/api/products`)
         revalidatePath(path)
         return products
     } catch (error: any) {
