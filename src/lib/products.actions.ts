@@ -3,11 +3,13 @@
 import { revalidatePath } from "next/cache"
 import { db } from "./prisma"
 import { notFound } from "next/navigation"
+import { serverUrl } from "./serverUrl"
 
 
 export const fetchProducts = async (path: string) => {
     try {
-        const products = await fetch(`https://furnitees.vercel.app/api/products`)
+
+        const products = await fetch(`${serverUrl}/api/products`)
         revalidatePath(path)
         return products
     } catch (error: any) {

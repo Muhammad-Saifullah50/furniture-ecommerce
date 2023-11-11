@@ -7,6 +7,7 @@ import { CartItem } from '.'
 import useSWR from 'swr'
 import { RotatingLines } from 'react-loader-spinner'
 import { CartItems } from '@/app/cart/page'
+import Link from 'next/link'
 
 
 
@@ -77,9 +78,12 @@ const Cart = () => {
                         <div className='flex flex-col items-center w-full font-semibold gap-8 mt-8'>
                             {!error &&
                                 (<p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p>)}
+                                <Link href={'/checkout'}>
                             <Button
                                 className='w-full text-base font-semibold'
-                                disabled={error}>Checkout</Button>
+                                disabled={error}
+                                
+                                >Checkout</Button></Link>
                         </div>
 
                     </SheetFooter>

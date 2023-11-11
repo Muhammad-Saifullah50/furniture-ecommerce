@@ -10,6 +10,7 @@ import { ZodError } from 'zod'
 import { RotatingLines } from 'react-loader-spinner'
 import { redirect, useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
+import { serverUrl } from '@/lib/serverUrl'
 
 
 const SigninPage = () => {
@@ -37,7 +38,7 @@ const SigninPage = () => {
         email: email.current,
         password: password.current,
         redirect: false,
-        callbackUrl: 'http://localhost:3000/sell'
+        callbackUrl: `${serverUrl}/sell`
       })
 
       console.log(result)
