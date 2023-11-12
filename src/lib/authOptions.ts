@@ -5,6 +5,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare, genSalt, hashSync } from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
+import { serverUrl } from './serverUrl';
+import { redirect } from 'next/navigation';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -36,7 +38,7 @@ export const authOptions: NextAuthOptions = {
             } else {
               throw new Error('Wrong credentials!')
             }
-          } 
+          }
 
           const newUser = await db.users.create({
             data: {
@@ -61,9 +63,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  // pages: {
-  //   signIn: '/signin',
-  // },
+  pages: {
+    signIn: '/signin',
+  },
   jwt: {
     secret: process.env.JWT_SECRET_KEY,
     encode: ({ secret, token }) => {
@@ -101,16 +103,31 @@ export const authOptions: NextAuthOptions = {
         }
         return updatedSession
       } else {
-        const newUser = await db.users.create({
-          data: {
-            name: session?.user?.name,
-            email: session?.user?.email,
-            image: session?.user?.image,
-          }
-        })
-        // console.log(newUser, 'newUser')
+        return session
       }
-      return session;
+    },
+    async signIn({ user }) {
+      try {
+        const userExists = await
+          db.users.findUnique({
+            where: {
+              email: user.email
+            }
+          })
+        if (!userExists) {
+          await db.users.create({
+            data: {
+              name: user.name,
+              email: user.email,
+              image: user.image
+            }
+          })
+        }
+        return true
+      } catch (error: any) {
+        console.log(error)
+        return false
+      }
     },
   }
 } satisfies NextAuthOptions;
