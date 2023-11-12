@@ -85,7 +85,7 @@ const Cart = () => {
                         width={27}
 
                     />
-                    <div className='bg-red-700 absolute top-3 text-white rounded-full px-1 right-9 text-[10px]'>{data?.cart?.length}</div>
+                    <div className='bg-red-700 absolute top-3 text-white rounded-full px-1 right-24 md:right-9  text-[10px]'>{data?.cart?.length}</div>
                 </SheetTrigger>
 
                 <SheetContent className='px-6'>
@@ -121,11 +121,11 @@ const Cart = () => {
                                 (<p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p>)}
 
                             <Button
-                                className='w-full text-base font-semibold'
-                                disabled={error}
+                                className='w-full text-base font-semibold flex gap-3'
+                                disabled={error || loading}
                                 onClick={handleCheckout}
 
-                            >Checkout {loading && (<RotatingLines
+                            >{loading ? 'Checking out' : 'Checkout'} {loading && (<RotatingLines
                                 strokeColor="white"
                                 strokeWidth="5"
                                 animationDuration="1"

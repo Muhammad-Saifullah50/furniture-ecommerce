@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from './ui/button'
 import Cart from './Cart'
+import { SideMenu } from '.'
 
 
 const Navbar = () => {
@@ -78,7 +79,9 @@ const Navbar = () => {
                 />
 
                 <Cart />
-
+                <div className='md:hidden'>
+                    <SideMenu />
+                </div>
             </div>
         </nav>
     )

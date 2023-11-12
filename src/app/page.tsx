@@ -26,8 +26,8 @@ export default async function Home() {
         />
         <div className='relative justify-center flex flex-col top-0 left-0 z-10 w-full md:w-1/2 h-full max-md:p-7 p-5'>
 
-          <h2 className='text-gold-primary text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold py-2'>Discover Our New Collection</h2>
-          <p className='text-base text-tertiary-gray font-medium leading-[24px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum unde harum ex dolor assumenda deserunt aut minima consequuntur facilis tempora.</p>
+          <h2 className='text-gold-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold py-2'>Elevate Comfort with Stylish Pieces.</h2>
+          <p className='text-base text-tertiary-gray font-medium leading-[24px]'>Discover comfort and style in every piece — a collection designed to elevate your space effortlessly.</p>
           <Button className='my-3 bg-gold-primary hover:bg-gold-secondary text-base' size='lg'>Shop Now</Button>
         </div>
       </div>

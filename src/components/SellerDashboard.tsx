@@ -26,11 +26,10 @@ const SellerDashboard = async () => {
                 <thead >
                     {userProducts.length > 0 && (
                         <tr className='border-b-[1px] border-black mb-5'>
-                            <th className='px-7'>Product ID</th>
                             <th className='px-7'>Image</th>
                             <th className='px-7'>Name</th>
                             <th className='px-7'>Price</th>
-                            <th className='px-7'>Posted At</th>
+                            <th className='px-7 hidden md:block'>Posted At</th>
                         </tr>
                     )}
 

@@ -4,7 +4,7 @@ import { Button } from './ui/button'
 const Footer = () => {
     return (
         <footer className='w-full'>
-            <div className='flex flex-wrap p-10 w-full border-t-[1px] border-gray-200 mt-5'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  p-10 w-full border-t-[1px] border-gray-200 mt-5 gap-10'>
 
                 <div className='w-2/5 flex flex-col gap-6'>
                     <div className='text-black font-bold text-2xl'>Furnitees.</div>
@@ -13,7 +13,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className='flex flex-col gap-6 w-1/5'>
+                <div className='flex flex-col gap-6 w-1/5 '>
                     <h5 className='text-quadruple-gray'>Links</h5>
                     <ul className='flex flex-col gap-6'>
                         <li className='text-black font-medium'>Home</li>
@@ -23,7 +23,7 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div className='flex flex-col gap-6 w-1/5'>
+                <div className='flex flex-col gap-6 w-1/5 '>
                     <h5 className='text-quadruple-gray'>Help</h5>
                     <ul className='flex flex-col gap-6'>
                         <li className='text-black font-medium'>Payment Options</li>

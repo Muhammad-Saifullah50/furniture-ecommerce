@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Button } from "./ui/button"
 import Link from "next/link"
 import ShareBtn from "./ShareBtn"
+import AddToCart from "./AddToCart"
 
 interface ProductCardProps {
     id: string
@@ -37,13 +38,7 @@ const ProductCard = ({ id, title, image, shrtdesc, price }: ProductCardProps) =>
                             <ShareBtn productId={id}/>
                         </div>
                         <div className="flex flex-col justify-center items-center">
-                            <Image
-                                src='/cart.svg'
-                                alt='cart'
-                                width={30}
-                                height={30}
-                                className="invert"
-                            />
+                           <AddToCart name={title} image={image} price={price}/>
                             <p>Add to Cart</p>
                         </div>
 

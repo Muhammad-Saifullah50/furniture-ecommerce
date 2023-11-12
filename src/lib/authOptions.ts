@@ -5,64 +5,66 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare, genSalt, hashSync } from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
-import { serverUrl } from './serverUrl';
-import { redirect } from 'next/navigation';
 
-export const authOptions: NextAuthOptions = {
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
+// created credential provider outside authoptions
+const CredentialProvider = CredentialsProvider({
+  name: "Credentials",
 
-      credentials: {
-        name: { label: "Username", type: "text", placeholder: "jsmith" },
-        email: { label: "Email", type: "email", placeholder: "jsmith@gmail.com" },
-        password: { label: "Password", type: "password" }
-      },
+  credentials: {
+    name: { label: "Username", type: "text", placeholder: "jsmith" },
+    email: { label: "Email", type: "email", placeholder: "jsmith@gmail.com" },
+    password: { label: "Password", type: "password" }
+  },
 
-      async authorize(credentials, req) {
-        try {
-          const { username, email, password } = credentials as any;
+  async authorize(credentials, req) {
+    try {
+      const { username, email, password } = credentials as any;
 
-          const salt = await genSalt(10);
-          const hashedPassword = hashSync(password, salt);
+      const salt = await genSalt(10);
+      const hashedPassword = hashSync(password, salt);
 
-          const existingUser = await db.users.findUnique({ where: { email: email } })
+      const existingUser = await db.users.findUnique({ where: { email: email } })
 
+      if (existingUser) {
+        const passwordMatch = await compare(password, existingUser?.password)
 
-          console.log(existingUser, 'existingUser')
-          if (existingUser) {
-            const passwordMatch = await compare(password, existingUser?.password)
-
-            if (existingUser?.name === username && passwordMatch) {
-              return existingUser
-            } else {
-              throw new Error('Wrong credentials!')
-            }
-          }
-
-          const newUser = await db.users.create({
-            data: {
-              name: username,
-              email: email,
-              password: hashedPassword,
-              image: ''
-            }
-          })
-          console.log(newUser, 'newUser')
-          return newUser
-
-        } catch (error: any) {
-          console.log(error?.message)
-          throw new Error(`${error?.message}`)
+        if (existingUser?.name === username && passwordMatch) {
+          return existingUser
+        } else {
+          throw new Error('Wrong credentials!')
         }
-
       }
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
+
+      const newUser = await db.users.create({
+        data: {
+          name: username,
+          email: email,
+          password: hashedPassword,
+          image: ''
+        }
+      })
+      console.log(newUser, 'newUser')
+      return newUser
+
+    } catch (error: any) {
+      console.log(error?.message)
+      throw new Error(`${error?.message}`)
+    }
+
+  }
+})
+
+// created google provider outside authoptions
+const Googleprovider = GoogleProvider({
+  clientId: process.env.GOOGLE_CLIENT_ID!,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+})
+
+
+
+// provided both providers to authoptions
+export const authOptions: NextAuthOptions = {
+  providers: [CredentialProvider, Googleprovider],
   pages: {
     signIn: '/signin',
   },
@@ -108,12 +110,12 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ user }) {
       try {
-        const userExists = await
-          db.users.findUnique({
-            where: {
-              email: user.email
-            }
-          })
+        const userExists = await db.users.findUnique({
+          where: {
+            email: user.email
+          }
+        });
+
         if (!userExists) {
           await db.users.create({
             data: {
@@ -121,13 +123,13 @@ export const authOptions: NextAuthOptions = {
               email: user.email,
               image: user.image
             }
-          })
+          });
         }
-        return true
+        return true;
       } catch (error: any) {
-        console.log(error)
-        return false
+        console.log(error);
+        return false;
       }
     },
   }
-} satisfies NextAuthOptions;
+} satisfies NextAuthOptions

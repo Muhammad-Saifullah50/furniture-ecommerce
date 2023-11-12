@@ -68,7 +68,7 @@ const ShopPage = async ({ searchParams }: { searchParams: { [key: string]: strin
 
         />
 
-        <div className='bottombar bg-[#F9F1E7] flex justify-evenly py-10'>
+        <div className='bottombar bg-[#F9F1E7] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10  p-10'>
           <div className='flex items-center gap-2'>
             <Image
               src={'/trophy.svg'}

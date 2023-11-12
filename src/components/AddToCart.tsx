@@ -4,6 +4,8 @@ import { Button } from './ui/button'
 import { useSession } from 'next-auth/react'
 import { useToast } from "@/components/ui/use-toast"
 import { RotatingLines } from 'react-loader-spinner'
+import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 
 interface Props {
@@ -17,6 +19,7 @@ const AddToCart = ({ name, image, price }: Props) => {
   const [quantity, setQuantity] = useState(1)
   const session = useSession()
   const [loading, setLoading] = useState(false)
+  const pathname = usePathname()
 
   //@ts-ignore
   const userId = session?.data?.user?.id
@@ -63,13 +66,26 @@ const AddToCart = ({ name, image, price }: Props) => {
   }
   return (
     <div className='flex justify-between'>
-      <div className='flex gap-3 justify-center items-center text-lg'>
+      <div className={`${pathname === '/' || pathname === '/shop' ? 'hidden' : ''} flex gap-3 justify-center items-center text-lg`}>
         <Button className=' text-lg' onClick={() => setQuantity(quantity - 1)} disabled={quantity === 1}>-</Button>
         <span>{quantity}</span>
         <Button className=' text-lg' onClick={() => setQuantity(quantity + 1)}>+</Button>
       </div>
 
-      <Button
+      {pathname === '/' || pathname === '/shop' ? (loading ? <RotatingLines
+        strokeColor="white"
+        strokeWidth="5"
+        animationDuration="1"
+        width="30"
+        visible={true}
+      /> : <Image
+        src='/cart.svg'
+        alt='cart'
+        width={30}
+        height={30}
+        className="invert"
+        onClick={handleClick}
+      />) : (<Button
         disabled={loading}
         onClick={handleClick}
         className='gap-3 text-base'
@@ -82,7 +98,7 @@ const AddToCart = ({ name, image, price }: Props) => {
           visible={true}
         />)}
 
-      </Button>
+      </Button>)}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import SellerDashboard from "./SellerDashboard";
 import ProductRow from "./ProductRow";
 import CartItem from "./CartItem";
+import SideMenu from "./SideMenu";
 
 export {
     Navbar,
@@ -14,4 +15,5 @@ export {
     SellerDashboard,
     ProductRow,
     CartItem,
+    SideMenu
 }

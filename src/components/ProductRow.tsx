@@ -34,13 +34,12 @@ const ProductRow = ({ id, name, image, createdAt, price }: ProductRowProps) => {
     }
 
     return (<>
-        <tr className='border-b-[1px] border-black m-2'>
-            <td className='px-3'>{id}</td>
+        <tr className='border-b-[1px] border-black m-2 '>
             <td className='px-3'><Image src={image} alt={name} width={70} height={70} className='h-16 p-1 rounded-md m-2' />
             </td>
-            <td className='px-3'>{name}</td>
+            <td className='px-3 '>{name}</td>
             <td className='px-3'>Rs{' '}{price}</td>
-            <td className='px-3'>{createdAt.toLocaleString()}</td>
+            <td className='px-3 max-md:hidden'>{createdAt.toLocaleString()}</td>
             <td>
                 <Link href={`/sell/edit/${id}`}>
                     <Button size={'icon'}>
