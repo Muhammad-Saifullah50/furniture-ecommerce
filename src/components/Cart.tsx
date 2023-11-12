@@ -7,13 +7,18 @@ import { CartItem } from '.'
 import useSWR from 'swr'
 import { RotatingLines } from 'react-loader-spinner'
 import { CartItems } from '@/app/cart/page'
-import Link from 'next/link'
+import getStripe from '@/lib/getStripe'
+import { useToast } from './ui/use-toast'
+import { useState } from 'react'
+
 
 
 
 const Cart = () => {
 
     const session = useSession()
+    const { toast } = useToast()
+    const [loading, setLoading] = useState(false)
 
     const getData = async () => {
         //@ts-ignore
@@ -33,6 +38,42 @@ const Cart = () => {
         //@ts-ignore
         return total + parseFloat(item.price) * item.quantity
     }, 0)
+
+    const handleCheckout = async () => {
+
+        try {
+            setLoading(true)
+            const stripe = await getStripe()
+
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data?.cart)
+            });
+
+            const result = await response.json();
+            if (result.status === 400 || result.status === 500) {
+                toast({
+                    title: 'Operation failed',
+                    description: result.message,
+                    variant: 'destructive',
+                })
+            } else {
+                toast({
+                    title: 'Redirecting ...',
+                })
+            }
+            stripe.redirectToCheckout({ sessionId: result.data.id })
+        } catch (error: any) {
+            console.error(error?.message)
+        } finally {
+            setLoading(false)
+        }
+
+    }
+
     return (
         <div>
             <Sheet>
@@ -78,12 +119,19 @@ const Cart = () => {
                         <div className='flex flex-col items-center w-full font-semibold gap-8 mt-8'>
                             {!error &&
                                 (<p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p>)}
-                            <Link href={'/checkout'} className='w-full'>
-                                <Button
-                                    className='w-full text-base font-semibold'
-                                    disabled={error}
 
-                                >Checkout</Button></Link>
+                            <Button
+                                className='w-full text-base font-semibold'
+                                disabled={error}
+                                onClick={handleCheckout}
+
+                            >Checkout {loading && (<RotatingLines
+                                strokeColor="white"
+                                strokeWidth="5"
+                                animationDuration="1"
+                                width="24"
+                                visible={true}
+                            />)}</Button>
                         </div>
 
                     </SheetFooter>
