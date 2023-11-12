@@ -37,7 +37,7 @@ const SigninPage = () => {
         username: username.current,
         email: email.current,
         password: password.current,
-        redirect: false,
+        redirect: true,
         callbackUrl: `${serverUrl}/sell`
       })
 

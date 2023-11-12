@@ -19,9 +19,9 @@ export const fetchProducts = async ({
 }
 ) => {
     try {
-        const products = await fetch(`${serverUrl}/api/products?query=${searchString}`)
+        const products = await fetch(`${serverUrl}/api/products?query=${searchString}&page=${pageNumber}&pageSize=${pageSize}`)
         revalidatePath(path)
-        return products
+        return products 
     } catch (error: any) {
         if (error) notFound()
         throw new Error(`Error fetching products ${error?.message}`)
@@ -32,6 +32,7 @@ export const fetchProducts = async ({
 
 export const fetchProductsByUserId = async (id: string) => {
     try {
+        revalidatePath('/sell')
 
         const userProducts = await db.products.findMany({
             //@ts-ignore

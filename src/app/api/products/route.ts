@@ -11,34 +11,45 @@ export const GET = async (request: NextRequest) => {
     try {
         const url = new URL(request.url)
         const query = url.searchParams.get('query')
+        const pageNumber = url.searchParams.get('page')
+        const pageSize = url.searchParams.get('pageSize')
+        //@ts-ignore
+        const skipAmount = (pageNumber - 1) * pageSize
 
         if (query) {
             const queryProducts = await db.products.findMany({
                 where: {
-                    OR: [
-                        {
-                            name: { contains: query }
-                        },
-                        {
-                            desc: { contains: query }
-                        },
-                        {
-                            shortDesc: { contains: query }
-                        }
-                    ]
+                    name: { contains: query, mode: "insensitive" }
                 }
             })
+
             return NextResponse.json(
                 { message: "Data retrieved successfully", data: queryProducts },
                 { status: 200 }
             );
         }
+
+        let products;
+        let isNext = false;
+
+        if (pageNumber && pageSize) {
+            products = await db.products.findMany({
+                orderBy: [{ createdAt: "desc" }],
+                skip: skipAmount,
+                take: Number(pageSize)
+            });
+
+            const totalPostsCount = await db.products.count();
+            isNext = totalPostsCount > skipAmount + products.length;
+        } else {
+
+            products = await db.products.findMany({
+                orderBy: [{ createdAt: "desc" }]
+            });
+        }
         
-        const products = await db.products.findMany({
-            orderBy: [{ createdAt: "desc" }]
-        })
         return NextResponse.json(
-            { message: "Data retrieved successfully", data: products },
+            { message: "Data retrieved successfully", data: products, isNext: isNext },
             { status: 200 })
     } catch (error: any) {
         return NextResponse.json(

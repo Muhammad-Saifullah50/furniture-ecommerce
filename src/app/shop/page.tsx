@@ -1,4 +1,5 @@
 import { ProductCard } from '@/components'
+import Pagination from '@/components/Pagination'
 import Search from '@/components/Search'
 import { Button } from '@/components/ui/button'
 import { fetchProducts } from '@/lib/products.actions'
@@ -15,18 +16,17 @@ export interface Product {
   price: string
   image: string
 }
-const ShopPage = async ({ searchParams }: { searchParams: { query: string } }) => {
+const ShopPage = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
 
 
   const response = await fetchProducts({
-    path: 'shop',
-    pageNumber: 1,
-    pageSize: 10,
+    path: '/shop',
+    pageNumber: searchParams?.page ? +searchParams?.page : 1,
+    pageSize: 8,
     searchString: searchParams.query || ''
   })
 
   const products = await response.json()
-  // console.log(products)
   return (
     <section>
       <div className='relative z-0 w-full flex items-center justify-end max-sm:h-[40vh] h-[50vh] '>
@@ -47,7 +47,7 @@ const ShopPage = async ({ searchParams }: { searchParams: { query: string } }) =
 
 
       <section className='mt-10'>
-        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-x-6 gap-y-28 my-10 '>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-[90vw] mx-auto gap-x-6 gap-y-28 mb-40 '>
           {products?.data?.map((product: Product) => (
             <ProductCard
               key={product.id}
@@ -61,20 +61,12 @@ const ShopPage = async ({ searchParams }: { searchParams: { query: string } }) =
           ))}
         </div>
 
-        <div className='btns flex justify-center items-center gap-4 my-28'>
-          <Button size={'icon'} className='bg-gold-primary hover:bg-gold-secondary'>
-            1
-          </Button>
-          <Button size={'icon'} className='bg-gold-primary hover:bg-gold-secondary'>
-            2
-          </Button>
-          <Button size={'icon'} className='bg-gold-primary hover:bg-gold-secondary'>
-            3
-          </Button>
-          <Button className='bg-gold-primary hover:bg-gold-secondary'>
-            Next
-          </Button>
-        </div>
+
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams?.page : 1}
+          isNext={products?.isNext}
+
+        />
 
         <div className='bottombar bg-[#F9F1E7] flex justify-evenly py-10'>
           <div className='flex items-center gap-2'>

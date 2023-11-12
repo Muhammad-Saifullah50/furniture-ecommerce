@@ -12,10 +12,10 @@ const Search = () => {
     useEffect(() => {
         const debounce = setTimeout(() => {
             if (search) {
-                router.push(`/shop/?query=` + search)
-            } 
+                router.push(`/shop/?query=` + search, { scroll: false })
+            }
             else {
-                router.push(`/shop`);
+                router.push(`/shop`, { scroll: false });
             }
         }, 300)
 

@@ -10,7 +10,8 @@ export default async function Home() {
   const response = await fetchProducts({
     path: '/',
     pageNumber: 1,
-    pageSize: 10
+    pageSize: 4,
+    searchString: ''
   })
   const products = await response.json()
   // console.log(products, 'products')

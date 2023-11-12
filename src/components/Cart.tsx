@@ -78,11 +78,11 @@ const Cart = () => {
                         <div className='flex flex-col items-center w-full font-semibold gap-8 mt-8'>
                             {!error &&
                                 (<p> Total Amount: <span className='text-gold-primary'>Rs {totalPrice}</span></p>)}
-                                <Link href={'/checkout'}>
-                            <Button
-                                className='w-full text-base font-semibold'
-                                disabled={error}
-                                
+                            <Link href={'/checkout'} className='w-full'>
+                                <Button
+                                    className='w-full text-base font-semibold'
+                                    disabled={error}
+
                                 >Checkout</Button></Link>
                         </div>
 
