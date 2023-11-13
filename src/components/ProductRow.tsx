@@ -40,7 +40,7 @@ const ProductRow = ({ id, name, image, createdAt, price }: ProductRowProps) => {
             <td className='px-3 '>{name}</td>
             <td className='px-3'>Rs{' '}{price}</td>
             <td className='px-3 max-md:hidden'>{createdAt.toLocaleString()}</td>
-            <td>
+            <td className='max-sm:hidden'>
                 <Link href={`/sell/edit/${id}`}>
                     <Button size={'icon'}>
                         <Image
@@ -53,7 +53,7 @@ const ProductRow = ({ id, name, image, createdAt, price }: ProductRowProps) => {
                     </Button>
                 </Link>
             </td>
-            <td>
+            <td className='max-sm:hidden'>
                 <Button
                     size={'icon'}
                     variant={'destructive'}
@@ -70,12 +70,50 @@ const ProductRow = ({ id, name, image, createdAt, price }: ProductRowProps) => {
                         alt={'edit'}
                         width={20}
                         height={20}
-                        
+
                     />)}
 
                 </Button>
             </td>
         </tr>
+
+        <span className='flex pt-2 justify-between'>
+        <td className='block sm:hidden'>
+                <Link href={`/sell/edit/${id}`}>
+                    <Button size={'icon'}>
+                        <Image
+                            src={'/edit.svg'}
+                            alt={'edit'}
+                            width={20}
+                            height={20}
+                            className='invert'
+                        />
+                    </Button>
+                </Link>
+            </td>
+            <td className='block sm:hidden'>
+                <Button
+                    size={'icon'}
+                    variant={'destructive'}
+                    disabled={loading}
+                    onClick={handleDelete}>
+                    {loading ? (<RotatingLines
+                        strokeColor="white"
+                        strokeWidth="5"
+                        animationDuration="1"
+                        width="24"
+                        visible={true}
+                    />) : (<Image
+                        src={'/trash.svg'}
+                        alt={'edit'}
+                        width={20}
+                        height={20}
+
+                    />)}
+
+                </Button>
+            </td>
+        </span>
 
     </>)
 }

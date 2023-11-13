@@ -71,12 +71,7 @@ const Navbar = () => {
                         {session.status === 'authenticated' ? (<Button className='bg-gold-primary hover:bg-gold-secondary' onClick={() => signOut()}>Sign out</Button>) : null}
                     </div>
                 </div>
-                <Image
-                    src="/search.svg"
-                    height={25}
-                    alt='icon'
-                    width={25}
-                />
+               
 
                 <Cart />
                 <div className='md:hidden'>

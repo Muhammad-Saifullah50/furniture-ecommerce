@@ -97,7 +97,7 @@ export default async function Home() {
     </section>
 
     <section >
-      <div className='flex w-full max-md:flex-col items-center gap-4 bg-[#FCF8F3] py-6 pl-6 h-[70vh] my-7'>
+      <div className='flex w-full max-md:flex-col items-center gap-4 bg-[#FCF8F3] py-6 pl-6 h-[55vh] sm:h-[70vh] my-7'>
         <div className='left w-1/3 max-md:w-full flex flex-col justify-center items-start gap-3'>
           <h2 className='text-primary-gray text-4xl font-bold'>50+ Beautiful rooms inspiration</h2>
           <p>Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>

@@ -121,7 +121,7 @@ const SigninPage = () => {
       </form>
       <Button
         className='bg-white text-base text-black w-1/2 mt-4 hover:bg-transparent border-black border-[1px] py-2 hover:bg-slate-100 flex gap-5'
-        onClick={() => signIn('google')}
+        onClick={() => signIn('google', { callbackUrl: `${serverUrl}` })}
       >
         <Image
           src={'/google.svg'}

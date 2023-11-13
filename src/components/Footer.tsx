@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className='w-2/5 flex flex-col gap-6'>
                     <div className='text-black font-bold text-2xl'>Furnitees.</div>
                     <div>
-                        <p className='text-quadruple-gray'>400 University Drive Suite 200 Coral Gables, FL 33134 USA</p>
+                        <p className='text-quadruple-gray'>Discover comfort and style in every piece — a collection designed to elevate your space effortlessly.</p>
                     </div>
                 </div>
 

@@ -30,7 +30,7 @@ export default class SimpleSlider extends Component {
         return (
             <div className="h-full pt-8">
                 <Slider {...settings} className="flex w-full h-full">
-                    <div className=" w-full relative px-2  h-80">
+                    <div className=" w-full relative px-2 h-56 sm:h-80">
                         <Image
                             src='/slider1.png'
                             width={300}
@@ -39,7 +39,7 @@ export default class SimpleSlider extends Component {
                             className="object-cover h-full"
                         />
                     </div>
-                    <div className="w-full relative px-2 h-80">
+                    <div className="w-full relative px-2 h-56 sm:h-80">
                         <Image
                             src='/slider2.png'
                             width={300}
@@ -48,7 +48,7 @@ export default class SimpleSlider extends Component {
                             className="object-cover h-full"
                         />
                     </div>
-                    <div className="w-full relative px-2 h-80">
+                    <div className="w-full relative px-2 h-56 sm:h-80">
                         <Image
                             src='/slider3.png'
                             width={300}
@@ -58,7 +58,7 @@ export default class SimpleSlider extends Component {
 
                         />
                     </div>
-                    <div className="w-full relative px-2 h-80">
+                    <div className="w-full relative px-2 h-56 sm:h-80">
                         <Image
                             src='/slider4.png'
                             width={300}

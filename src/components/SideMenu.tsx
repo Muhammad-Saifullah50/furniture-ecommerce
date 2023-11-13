@@ -34,20 +34,20 @@ const SideMenu = () => {
 
                     <ul className="flex flex-col gap-5 mt-10">
                     <li
-                        className={`${isActive('/') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary hover:bg-gold-primary hover:bg-opacity-40 w-full' : ''}`}
+                        className={`${isActive('/') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary  w-full pb-2 border-b-2 border-gray-500' : 'pb-2 border-b-2 border-gray-500'}`}
                     >
-                        <Link className='border-b-2 border-gray-500 w-full' href="/">Home</Link>
+                        <Link href="/">Home</Link>
                     </li>
                     <li
-                        className={`${isActive('/shop') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary hover:bg-gold-primary hover:bg-opacity-40' : ''}`}>
+                        className={`${isActive('/shop') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary w-full pb-2 border-b-2 border-gray-500' : 'pb-2 border-b-2 border-gray-500'}`}>
                         <Link href="/shop">Shop</Link>
                     </li>
                     <li
-                        className={`${isActive('/cart') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary hover:bg-gold-primary hover:bg-opacity-40' : ''}`}
+                        className={`${isActive('/cart') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary w-full pb-2 border-b-2 border-gray-500' : 'pb-2 border-b-2 border-gray-500'}`}
                     >
                         <Link href="/cart">My Cart</Link>
                     </li>
-                    <li className={`${isActive('/sell') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary hover:bg-gold-primary hover:bg-opacity-40' : ''}`}
+                    <li className={`${isActive('/sell') ? 'underline underline-offset-4 decoration-4 decoration-gold-primary w-full pb-2 border-b-2 border-gray-500' : 'pb-2 border-b-2 border-gray-500'}`}
                     >
                         <Link href="/sell">Become a Seller</Link>
                     </li>

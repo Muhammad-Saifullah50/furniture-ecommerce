@@ -3,6 +3,8 @@ import { Button } from "./ui/button"
 import Link from "next/link"
 import ShareBtn from "./ShareBtn"
 import AddToCart from "./AddToCart"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/authOptions"
 
 interface ProductCardProps {
     id: string
@@ -12,7 +14,9 @@ interface ProductCardProps {
     price: string
 
 }
-const ProductCard = ({ id, title, image, shrtdesc, price }: ProductCardProps) => {
+const ProductCard = async ({ id, title, image, shrtdesc, price }: ProductCardProps) => {
+    const session = await getServerSession(authOptions)
+
     return (<>
         <div>
             <div className="w-full h-48 relative z-0 group ">
@@ -39,7 +43,7 @@ const ProductCard = ({ id, title, image, shrtdesc, price }: ProductCardProps) =>
                         </div>
                         <div className="flex flex-col justify-center items-center">
                            <AddToCart name={title} image={image} price={price}/>
-                            <p>Add to Cart</p>
+                            <p> {session && 'Add to Cart'}</p>
                         </div>
 
                     </div>

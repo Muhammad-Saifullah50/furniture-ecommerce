@@ -33,8 +33,8 @@ const CartItem = ({ itemId, name, image, price, quantity, styles }: Props) => {
             <div>
                 <Image src={image} alt={name} width={50} height={50} className='rounded-lg object-fill w-14 h-14' />
             </div>
-            <div className='flex flex-col text-base items-center justify-center max-w-sm truncate'>
-                <p className='font-semibold truncate '>{name}</p>
+            <div className='flex flex-col text-base items-center justify-center max-w-sm flex-wrap '>
+                <p className='font-semibold  '>{name}</p>
                 <p>{quantity} x <span className='text-gold-primary'>Rs {price}</span></p>
             </div>
             <div>

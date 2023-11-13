@@ -37,8 +37,8 @@ const ShareBtn = ({productId}: {productId: string}) => {
                         Copy the link below to share this product
 
                         <div className='mt-4 flex'>
-                            <Input value={LinktoCopy}
-                                className='bg-transparent' />
+                            <Input value={LinktoCopy} 
+                                className='bg-transparent text-base ' />
                             <Button
                                 className='bg-gold-primary hover:bg-gold-secondary ml-1' size='icon'
                                 onClick={handleCopy}>
