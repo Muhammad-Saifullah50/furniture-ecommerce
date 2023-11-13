@@ -28,7 +28,8 @@ export default async function Home() {
 
           <h2 className='text-gold-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold py-2'>Elevate Comfort with Stylish Pieces.</h2>
           <p className='text-base text-tertiary-gray font-medium leading-[24px]'>Discover comfort and style in every piece — a collection designed to elevate your space effortlessly.</p>
-          <Button className='my-3 bg-gold-primary hover:bg-gold-secondary text-base' size='lg'>Shop Now</Button>
+          <Link href={'/shop'}>
+          <Button className='my-3 bg-gold-primary hover:bg-gold-secondary text-base' size='lg'>Shop Now</Button></Link>
         </div>
       </div>
     </section>

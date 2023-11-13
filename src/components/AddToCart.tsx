@@ -23,7 +23,7 @@ const AddToCart = ({ name, image, price }: Props) => {
 
   //@ts-ignore
   const userId = session?.data?.user?.id
-  if (!userId) return 'Please sign to purchase'
+  if (!userId) return <p>{pathname === '/shop' || pathname === '/' ? '' : 'Please sign in to purchase '}</p>
   const handleClick = async () => {
 
     try {
@@ -89,7 +89,12 @@ const AddToCart = ({ name, image, price }: Props) => {
         disabled={loading}
         onClick={handleClick}
         className='gap-3 text-base'
-        size='xl'>{loading ? 'Adding' : 'Add'} to Cart
+        size='xl'>
+        {
+          pathname === '/shop' || pathname === '/'
+            ? ''
+            : (loading ? 'Adding' : 'Add') + ' to Cart'
+        }
         {loading && (<RotatingLines
           strokeColor="white"
           strokeWidth="5"

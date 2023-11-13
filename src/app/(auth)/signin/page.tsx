@@ -19,7 +19,6 @@ const SigninPage = () => {
   const email = useRef('')
   const password = useRef('')
   const router = useRouter()
-  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +37,7 @@ const SigninPage = () => {
         email: email.current,
         password: password.current,
         redirect: true,
-        callbackUrl: `${serverUrl}/sell`
+        callbackUrl: `${serverUrl}`
       })
 
       console.log(result)
@@ -53,7 +52,7 @@ const SigninPage = () => {
           title: 'Success',
           description: 'Signed in successfully',
         })
-        router.push('/sell')
+        router.push('/')
       }
 
     } catch (error) {
@@ -62,10 +61,18 @@ const SigninPage = () => {
         const firstError = Object.keys(errmsg)[0]
         const firstErrorValue = errmsg[firstError]
         //@ts-ignore
-        setError(firstErrorValue)
+        toast({
+          title: 'Operation failed',
+          description: firstErrorValue,
+          variant: 'destructive',
+        })
 
         if (Object.keys(errmsg).length === 0) {
-          setError(error.flatten().formErrors[0])
+          toast({
+            title: 'Operation failed',
+            description: error.flatten().formErrors[0],
+            variant: 'destructive',
+          })
         }
       }
     } finally {
@@ -80,12 +87,7 @@ const SigninPage = () => {
 
       <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
 
-        {error && (
-          <div className='bg-red-100 py-2 text-sm flex flex-col justify-center items-center  border-red-600 border-2'>
-            <h6>Authentication Failed</h6>
-            <p className='text-red-600'>{error}</p>
-          </div>
-        )}
+       
 
         <div>
           <Label>Name</Label>
