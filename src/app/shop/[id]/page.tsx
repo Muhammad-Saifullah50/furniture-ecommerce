@@ -14,7 +14,7 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
         description: product?.shortDesc
     }
     return (<>
-        <section className='flex max-md:flex-col md:flex-row p-20 space-x-20 justify-between'>
+        <section className='flex max-md:flex-col md:flex-row p-5 sm:p-10 md:p-20 md:space-x-20 justify-between max-md:gap-10'>
             <div className='left w-full  md:w-1/2 '>
                 <Image
                     src={product?.image}
@@ -43,7 +43,7 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
             </div>
         </section>
 
-        <section className='p-20 flex flex-col text-center'>
+        <section className='p-5 sm:p-10 md:p-20 flex flex-col text-center'>
             <h4 className='my-4 text-2xl font-semibold'>Product Description</h4>
             <p>{product?.desc}</p>
         </section>
@@ -51,7 +51,7 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
         <div className='bg-gray-200 w-full  h-[2px]' />
 
         <div className='flex my-10 gap-10 justify-center items-center'>
-            <h3 className='font-semibold'>Posted By</h3>
+            <h3 className='font-semibold hidden sm:block'>Posted By</h3>
 
             <div>
                 <Image

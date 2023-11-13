@@ -89,9 +89,9 @@ const AddToCart = ({ name, image, price }: Props) => {
       />) : (<Button
         disabled={loading}
         onClick={handleClick}
-        className='gap-3 text-base'
+        className='gap-3 text-base max-lg:p-5 '
         size='xl'>
-        {loading ? 'Adding' : 'Add'} + to cart
+        {loading ? 'Adding' : 'Add'} to cart
         {loading && (<RotatingLines
           strokeColor="white"
           strokeWidth="5"

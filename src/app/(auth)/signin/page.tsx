@@ -83,9 +83,9 @@ const SigninPage = () => {
   }
   return (<>
     <section className='flex flex-col items-center justify-center min-h-[80vh]'>
-      <h2 className='font-bold text-gold-primary text-3xl my-4 w-1/2 text-center'>Welcome back! Please sign in to continue</h2>
+      <h2 className='font-bold text-gold-primary text-3xl my-4 w-3/4 md:w-1/2 text-center'>Welcome back! Please sign in to continue</h2>
 
-      <form onSubmit={handleSubmit} className='w-1/2 flex flex-col gap-5'>
+      <form onSubmit={handleSubmit} className='w-3/4 md:w-1/2 flex flex-col gap-5'>
 
        
 
@@ -120,7 +120,7 @@ const SigninPage = () => {
 
       </form>
       <Button
-        className='bg-white text-base text-black w-1/2 mt-4 hover:bg-transparent border-black border-[1px] py-2 hover:bg-slate-100 flex gap-5'
+        className='bg-white text-base text-black w-3/4 md:w-1/2 mt-4 hover:bg-transparent border-black border-[1px] py-2 hover:bg-slate-100 flex gap-3 sm:gap-5'
         onClick={() => signIn('google', { callbackUrl: `${serverUrl}` })}
       >
         <Image
@@ -129,7 +129,7 @@ const SigninPage = () => {
           height={35}
           alt='google'
         />
-        Sign in with Google </Button>
+        Sign with Google </Button>
     </section>
 
   </>)
