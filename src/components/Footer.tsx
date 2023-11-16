@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
 
             <div className='py-6 border-t-[1px] border-gray-200 w-[92%] mx-auto'>
-                <p className='text-quadruple-gray'>2023 Furniro. All rights reserved</p>
+                <p className='text-quadruple-gray'>2023 Furnitees. All rights reserved</p>
             </div>
         </footer>
     )
