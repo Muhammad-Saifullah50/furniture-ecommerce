@@ -83,6 +83,7 @@ const Cart = () => {
                         height={27}
                         alt='icon'
                         width={27}
+                        className='cursor-pointer mt-1'
 
                     />
                     <div className='bg-red-700 absolute top-3 text-white rounded-full px-1 right-24 md:right-9  text-[10px]'>{data?.cart?.length}</div>
