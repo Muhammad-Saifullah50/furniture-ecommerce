@@ -107,7 +107,7 @@ export default async function Home() {
       </div>
     </section>
 
-    <section>
+    <section className='max-sm:mt-10'>
       <div className='flex flex-col items-center justify-center'>
         <h2 className='text-secondary-gray text-xl font-semibold' >Share your setup with</h2>
         <h1 className='font-bold text-primary-gray text-[32px]'> #FuniroFurniture</h1>
