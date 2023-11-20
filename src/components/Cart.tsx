@@ -29,7 +29,7 @@ const Cart = () => {
 
     //@ts-ignore
     const { data, error, isLoading } = useSWR(`/api/cart?id=${session?.data?.user?.id}`, getData, {
-        refreshInterval: 100,
+        refreshInterval: 1,
         refreshWhenHidden: false
     })
 
